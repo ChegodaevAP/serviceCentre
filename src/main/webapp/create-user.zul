@@ -1,0 +1,51 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
+        id="selectRole"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.security.CreateUserVM')"
+        closable="true">
+
+        <caption>
+            <button label="Login" if="${empty execution.userPrincipal}" href="/login.zul"/>
+            <button label="Logout" disabled="${empty execution.userPrincipal}" href="/j_spring_security_logout"/>
+        </caption>
+
+        <groupbox form="@id('user') @load(vm.user) @save(vm.user, before={'create'})">
+            <caption>create.user</caption>
+            <grid>
+                <columns>
+                    <column/>
+                    <column/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="user.name"/>
+                        <textbox value="@bind(user.name)" id="name"/>
+                    </row>
+                    <row>
+                        <label value="user.secondName"/>
+                        <textbox value="@bind(user.secondName)"/>
+                    </row>
+                    <row>
+                        <label value="user.familyName"/>
+                        <textbox value="@bind(user.familyName)"/>
+                    </row>
+                    <row>
+                        <label value="user.email"/>
+                        <textbox value="@bind(user.email)" constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address"/>
+                    </row>
+                    <row>
+                        <label value="user.password"/>
+                        <textbox value="@bind(user.password)" type="password"/>
+                    </row>
+                </rows>
+            </grid>
+        </groupbox>
+    <hbox width="600px">
+    <button id="action.create" label="${lables.action.create}" onClick="@command('create')" />
+    <button id="action.select.roles" onClick="@command('showRoleList')"/>
+    </hbox>
+</window>

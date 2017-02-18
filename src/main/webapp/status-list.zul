@@ -1,0 +1,36 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<window
+        id="statusList"
+        title="Статусы"
+        border="normal"
+        height="80%"
+        width="50%"
+        closable="true"
+        apply="org.zkoss.bind.BindComposer"
+        action="show: slideDown;hide: slideUp"
+        viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.StatusListVM')">
+    <div>
+        <hbox align="center">
+            Адрес:
+            <textbox value="@bind(vm.keyWord)"/>
+            <button label="Поиск" image="/images/search.png" onClick="@command('search')"/>
+            <button label="Добавить" image="/images/search.png" onClick="@command('addStatus')"/>
+            <button label="Добавить" image="/images/search.png" onClick="refresh(placeList)"/>
+        </hbox>
+        <listbox height="100%" model="@bind(vm.statusListModel)" emptyMessage="Статусов не найдено"
+                 style="margin-top:10px"
+                 mold="paging" pageSize="10">
+            <listhead>
+                <listheader width="10%" label="№"/>
+                <listheader width="80%" label="Статус"/>
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell label="@bind(each.id)"></listcell>
+                    <listcell label="@bind(each.status)"></listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </div>
+</window>

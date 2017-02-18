@@ -1,0 +1,66 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<window
+        id="clientList"
+        title="Клиенты"
+        border="normal"
+        height="80%"
+        width="50%"
+        closable="true"
+        apply="org.zkoss.bind.BindComposer"
+        action="show: slideDown;hide: slideUp"
+        viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.ClientListVM')">
+
+    <borderlayout>
+        <west size="60%" flex="true" >
+            <div>
+                <hbox align="center">
+                    Адрес:
+                    <textbox value="@bind(vm.keyWord)"/>
+                    <button label="Поиск" image="/images/search.png" onClick="@command('search')"/>
+                    <button label="Добавить" image="/images/search.png" onClick="@command('addClient')"/>
+                    <button label="Обновить" image="/images/search.png" />
+                </hbox>
+                <listbox  height="100%" model="@bind(vm.clientListModel)" emptyMessage="Клиентов не найдено"
+                          selectedItem="@bind(vm.selectedClient)" style="margin-top:10px"
+                          mold="paging" pageSize="10">
+                    <listhead>
+                        <listheader width="15%" label="№"/>
+                        <listheader width="15%" label="Имя"/>
+                        <listheader width="15%" label="Фамилия"/>
+                        <listheader width="15%" label="Отчество"/>
+                        <listheader width="15%" label="Адрес"/>
+                        <listheader width="15%" label="Телефон"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem>
+                            <listcell label="@bind(each.id)"></listcell>
+                            <listcell label="@bind(each.name)"></listcell>
+                            <listcell label="@bind(each.midleName)"></listcell>
+                            <listcell label="@bind(each.surname)"></listcell>
+                            <listcell label="@bind(each.address)"></listcell>
+                            <listcell label="@bind(each.phone)"></listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </div>
+        </west>
+        <east size="40%" splittable="true" collapsible="true">
+            <div>
+                <hbox style="margin-top:20px" visible="@bind(not empty vm.selectedClient)">
+                    <vbox>
+                        <hlayout>
+                            № :
+                            <label value="вввв" style="font-weight:bold"/>
+                        </hlayout>
+                        <hlayout>
+                            Адресс :
+                            <label value="вввв" style="font-weight:bold"/>
+                        </hlayout>
+                    </vbox>
+                </hbox>
+            </div>
+        </east>
+    </borderlayout>
+
+</window>

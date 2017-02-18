@@ -1,0 +1,27 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
+        id="createClientWindow"
+        width="50%"
+        height="50%"
+        title="Новый клиент"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.CreateClientVM')"
+        closable="true">
+
+    <groupbox form="@id('client') @load(vm.client) @save(vm.client, before={'create'})" width="100%">
+        <label value="фамилия"/>
+        <textbox value="@bind(client.surname)" constraint="no empty"/>
+        <label value="Имя"/>
+        <textbox value="@bind(client.name)" constraint="no empty"/>
+        <label value="Отчество"/>
+        <textbox value="@bind(client.midleName)" constraint="no empty"/>
+        <label value="Адрес"/>
+        <textbox value="@bind(client.address)" constraint="no empty"/>
+        <label value="Телефон"/>
+        <textbox value="@bind(client.phone)" constraint="no empty"/>
+    </groupbox>
+    <button id="createClient" label="Создать" onClick="@command('create')"/>
+</window>

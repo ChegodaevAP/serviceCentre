@@ -1,0 +1,13 @@
+<zk xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul/zul.xsd">
+    <separator></separator>
+    <window vflex="true"  position="center" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.UserVM')">
+        <vlayout>
+
+            <a href="/login">login</a>
+            <a href="/logout">logout</a>
+
+            <label value="@load(vm.allUser.name)" />
+        </vlayout>
+    </window>
+</zk>
