@@ -1,0 +1,23 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
+        id="createOrderWindow"
+        width="40%%"
+        height="20%"
+        title="Новый заказ на обслуживание/ремонт"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.CreateOrderVM')"
+        closable="true">
+    <style src="/css/style.css"/>
+    <groupbox form="@id('order') @load(vm.order) @save(vm.order, before={'create'})" width="100%">
+        <label value="Описание"/>
+        <textbox value="@bind(order.description)" id="address" constraint="no empty"/>
+        <chosenbox sclass="mailinput" hflex="1"
+                   model="@load(vm.clients)"
+                   emptyMessage="Выберите клиента"/>
+        <button label="Добавить клиента" onClick="@command('newClient')"/>
+    </groupbox>
+    <button id="createPlace" label="Создать" onClick="@command('create')"/>
+</window>

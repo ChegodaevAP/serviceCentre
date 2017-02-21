@@ -31,7 +31,7 @@ public class OrderDao {
                     .setParameter("id", id);
             order = (Order) query.getSingleResult();
             if (order != null) {
-                Hibernate.initialize(order);
+                Hibernate.initialize(order.getMuvementHistory());
             }
         } catch (Exception e) {
             return null;

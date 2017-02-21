@@ -2,76 +2,43 @@
 <?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns="http://www.zkoss.org/2005/zul"
-		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
-		id="index"
-		closable="false"
-		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.IndexVM')">
-	<panel border="normal" title="ZK Report Viewer">
-		<panelchildren>
-			<menubar id="menubar" width="100%" >
-				 <menu label="Справочники" >
-					<menupopup>
-						<menuitem label="Места" onClick="@command('showPlaces')"/>
-						<menuitem label="Статусы" onClick="@command('showStatus')"/>
-						<menuitem label="Клиенты" onClick="@command('showClients')"/>
-						<menuseparator></menuseparator>
-						<menuitem label="Save" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_save.png" />
-						<menuitem label="Save As..." onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_save-as.png" />
-						<menuitem label="Save All" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_save-all.png" />
-						<menuitem label="Close" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_close.png" />
-						<menuitem label="Close All" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_close-all.png" />
-						<menuseparator></menuseparator>
-						<menuitem label="Import" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_import.png" />
-						<menuitem label="Export" disabled="true" image="/widgets/menu/drop-down_menu/img/file_export.png" />
-						<menuseparator></menuseparator>
-						<menuitem label="Exit" disabled="true" image="/widgets/menu/drop-down_menu/img/file_exit.png" />
-					</menupopup>
-				</menu>
-				<menu label="Edit">
-					<menupopup>
-						<menuitem label="Undo" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_undo.png" />
-						<menuitem label="Redo" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_redo.png" />
-						<menuseparator></menuseparator>
-						<menuitem label="Cut" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_cut.png" />
-						<menuitem label="Copy" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_copy.png" />
-						<menuitem label="Paste" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_paste.png" />
-						<menuseparator></menuseparator>
-						<menuitem label="Select All" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_select-all.png" />
-					</menupopup>
-				</menu>
-				<menu label="Help">
-					<menupopup>
-						<menuitem label="Issue tracker" target="_zkdemo" href="http://tracker.zkoss.org" image="/widgets/menu/drop-down_menu/img/bug.png" />
-						<menu label="About">
-							<menupopup>
-								<menuitem label="About Potix" target="_zkdemo" href="http://www.zkoss.org/support/about" onClick="alert(self.label)" />
-							</menupopup>
-						</menu>
-					</menupopup>
-				</menu>
-				<menu label="User">
-					<menupopup>
-						<menuitem label="Login" if="${empty execution.userPrincipal}" href="/login.zul"/>
-						<menuitem label="Logout" disabled="${empty execution.userPrincipal}" href="/j_spring_security_logout" />
-					</menupopup>
-				</menu>
-				<menuitem label="ZK Web Framework" target="_zkdemo" href="http://www.zkoss.org/download" image="/images/zk16x16.png" onClick="alert(self.label)" />
-			</menubar>
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
+        id="index"
+        closable="false"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.IndexVM')">
+    <panel border="normal" title="ZK Report Viewer">
+        <panelchildren>
+            <menubar id="menubar" width="100%">
+                <menu label="Справочники">
+                    <menupopup>
+                        <menuitem label="Места" onClick="@command('showPlaces')"/>
+                        <menuitem label="Статусы" onClick="@command('showStatus')"/>
+                        <menuitem label="Клиенты" onClick="@command('showClients')"/>
+                    </menupopup>
+                </menu>
+                <menu label="User">
+                    <menupopup>
+                        <menuitem label="Login" if="${empty execution.userPrincipal}" href="/login.zul"/>
+                        <menuitem label="Logout" disabled="${empty execution.userPrincipal}"
+                                  href="/j_spring_security_logout"/>
+                        <menuitem label="Create User" disabled="${empty execution.userPrincipal}"
+                                  href="/create-user.zul"/>
+                    </menupopup>
+                </menu>
+            </menubar>
 
-			<div height="100%" sclass="footer">
-
-					<hlayout>
-						Hello! <label value="${empty execution.userPrincipal.name?
-				'anonymous' : execution.userPrincipal.name }"/>
-					</hlayout>
-				<include src="select-roles.zul" />
-
-
-			</div>
-		</panelchildren>
-	</panel>
-	<button label="Users" href="/user-list.zul" sclass="myButton"/>
-	<button label="create.user" href="/create-user.zul" />
+            <div height="100%" sclass="footer">
+                <!--<hlayout>-->
+                    <!--Hello!-->
+                    <!--<label value="${empty execution.userPrincipal.name?-->
+				<!--'anonymous' : execution.userPrincipal.name }"/>-->
+                <!--</hlayout>-->
+                <include src="order-list.zul"/>
+            </div>
+        </panelchildren>
+    </panel>
+    <button label="Users" href="/user-list.zul" sclass="myButton"/>
+    <button label="create.user" href="/create-user.zul"/>
 </window>

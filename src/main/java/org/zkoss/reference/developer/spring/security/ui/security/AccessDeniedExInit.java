@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package org.zkoss.reference.developer.spring.security.ui.security;
 
 import java.util.Map;
@@ -10,10 +8,6 @@ import org.zkoss.reference.developer.spring.security.ui.security.SecurityUtil;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.util.GenericInitiator;
 
-/**
- * @author Ian YT Tsai (zanyking)
- *
- */
 public class AccessDeniedExInit extends GenericInitiator {
 
 	public void doInit(Page page, Map<String, Object> args) throws Exception {

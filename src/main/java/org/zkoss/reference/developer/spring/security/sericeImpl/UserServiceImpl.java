@@ -3,7 +3,8 @@ package org.zkoss.reference.developer.spring.security.sericeImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zkoss.reference.developer.spring.security.dao.UserDao;
 import org.zkoss.reference.developer.spring.security.dao.Role;
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
             userProfileSet.add(userDao.findProfile(type.name()));
         }
         user.setUserProfiles(userProfileSet);
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.insertUser(user);
     }
 

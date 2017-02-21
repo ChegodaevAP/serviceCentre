@@ -6,9 +6,8 @@ import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.reference.developer.spring.security.model.Order;
-import org.zkoss.reference.developer.spring.security.model.Place;
-import org.zkoss.reference.developer.spring.security.service.DirectoryService;
 import org.zkoss.reference.developer.spring.security.service.OrderService;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
@@ -16,7 +15,7 @@ import org.zkoss.zul.Window;
 
 public class OrderListVM {
 
-    private final String CREATE_PLACE = "/create-place.zul";
+    private final String CREATE_ORDER = "/create-order.zul";
     private Window window;
     @WireVariable
     private OrderService orderService;
@@ -26,11 +25,18 @@ public class OrderListVM {
     private Order selectedOrder;
 
     private String keyWord;
+
     @Init(superclass = true)
     public void init(@ContextParam(ContextType.COMPONENT) Window window) {
         this.window = window;
         orderListModel = new ListModelList<Order>(orderService.getAllOrder());
         ((ListModelList<Order>) orderListModel).setMultiple(true);
+    }
+
+    @Command
+    public void addOrder() {
+        Window wind = (Window) Executions.createComponents(CREATE_ORDER, window, null);
+        wind.doModal();
     }
 
     @Command
