@@ -29,11 +29,9 @@ public class Request implements Serializable {
     @OneToMany(mappedBy = "request")
     private Set<StatusHistory> statusHistories;
 
-    //TODO: Опечатка
     @OneToMany(mappedBy = "request")
     private Set<MovementHistory> movementHistory;
 
-    //TODO: Опечатка
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CLIENT_ID", nullable = false)
     private Client client;

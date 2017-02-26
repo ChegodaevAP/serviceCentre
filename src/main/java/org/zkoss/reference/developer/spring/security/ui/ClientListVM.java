@@ -50,7 +50,7 @@ public class ClientListVM {
     }
 
     @Command
-    public void close(){
+    public void close() {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put(CLIENT, selectedClient);
         BindUtils.postGlobalCommand(null, null, SELECTED_CLIENT,

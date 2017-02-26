@@ -32,11 +32,10 @@ public class CreateStatusVM {
     //TODO: Сделать общий интерфейс отвечающий за создание новой записи в БД
 
     @Command
-    public void create(){
-        if(directoryService.addNewStatus(status) == null){
+    public void create() {
+        if (directoryService.addNewStatus(status) == null) {
             Clients.showNotification(INSERT_ERROR);
-        }
-        else{
+        } else {
             Clients.showNotification(INSERT_SUCSSES);
             window.detach();
         }

@@ -31,14 +31,13 @@ public class CreatePlaceVM {
     }
 
     @Command
-    public void create(){
-       if(directoryService.addNewPlace(place) == null){
-           Clients.showNotification(INSERT_ERROR);
-       }
-       else{
-           Clients.showNotification(INSERT_SUCSSES);
-           window.detach();
-       }
+    public void create() {
+        if (directoryService.addNewPlace(place) == null) {
+            Clients.showNotification(INSERT_ERROR);
+        } else {
+            Clients.showNotification(INSERT_SUCSSES);
+            window.detach();
+        }
     }
 
     public Place getPlace() {

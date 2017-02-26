@@ -17,7 +17,6 @@ public class UserVM {
     @WireVariable
     UserService userService;
 
-
     public List<User> getAllUser() {
         List<User> list = new ArrayList<User>();
         return userService.getAllUser();

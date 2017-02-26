@@ -28,12 +28,14 @@ public class IndexVM {
                 PLACES_LIST, null, null);
         wind.doModal();
     }
+
     @Command
     public void showStatus() {
         Window wind = (Window) Executions.createComponents(
                 STATUS_LIST, null, null);
         wind.doModal();
     }
+
     @Command
     public void showClients() {
         Window wind = (Window) Executions.createComponents(

@@ -5,7 +5,6 @@ import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.reference.developer.spring.security.model.Client;
-import org.zkoss.reference.developer.spring.security.model.Status;
 import org.zkoss.reference.developer.spring.security.service.ClientService;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;

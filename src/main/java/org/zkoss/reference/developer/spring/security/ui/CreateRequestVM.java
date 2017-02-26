@@ -12,13 +12,10 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
 import org.zkoss.zul.Window;
 
-import java.util.*;
-
 @VariableResolver(DelegatingVariableResolver.class)
 public class CreateRequestVM {
     public static final String INSERT_ERROR = "Запись уже существует";
-    //TODO: опечатка
-    public static final String INSERT_SUCSSES = "Успешно";
+    public static final String INSERT_SUCCESS = "Успешно";
     public static final String CREATE_CLIENT = "/create-client.zul";
     public static final String CLIENT_LIST = "/client-list.zul";
     public static final String SELECTED_CLIENT = "refreshSelectedClient";
@@ -33,11 +30,6 @@ public class CreateRequestVM {
 
     @Init(superclass = true)
     public void init(@ContextParam(ContextType.COMPONENT) Window window) {
-        //TODO: Переделать механизм конвертации
-        List<String> list = new ArrayList<String>();
-        for(Client client:clientService.getAllClient()){
-            list.add(client.getName() + " " + client.getMidleName() + " " + client.getSurname());
-        }
         this.window = window;
         request = new Request();
     }
@@ -48,7 +40,7 @@ public class CreateRequestVM {
         if (requestService.insertRequest(request) == null) {
             Clients.showNotification(INSERT_ERROR);
         } else {
-            Clients.showNotification(INSERT_SUCSSES);
+            Clients.showNotification(INSERT_SUCCESS);
             window.detach();
         }
     }
@@ -58,6 +50,7 @@ public class CreateRequestVM {
         Window wind = (Window) Executions.createComponents(CLIENT_LIST, window, null);
         wind.doModal();
     }
+
     @GlobalCommand(SELECTED_CLIENT)
     @NotifyChange({"selectedClient"})
     public void refreshSelectedClient(@BindingParam("value") Client selectedClient) {

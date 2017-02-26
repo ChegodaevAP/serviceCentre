@@ -3,7 +3,10 @@ package org.zkoss.reference.developer.spring.security.sericeImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zkoss.reference.developer.spring.security.dao.RequestDao;
-import org.zkoss.reference.developer.spring.security.model.*;
+import org.zkoss.reference.developer.spring.security.model.Request;
+import org.zkoss.reference.developer.spring.security.model.RequestUser;
+import org.zkoss.reference.developer.spring.security.model.Status;
+import org.zkoss.reference.developer.spring.security.model.StatusHistory;
 import org.zkoss.reference.developer.spring.security.service.DirectoryService;
 import org.zkoss.reference.developer.spring.security.service.RequestService;
 import org.zkoss.reference.developer.spring.security.service.SecurityService;
@@ -52,6 +55,7 @@ public class RequestServiceImpl implements RequestService {
         statusHistories.add(statusHistory);
         return statusHistories;
     }
+
     private Set<RequestUser> getRequestUserForNewRequest() {
         RequestUser requestUser = new RequestUser();
         requestUser.setDate(new Date());

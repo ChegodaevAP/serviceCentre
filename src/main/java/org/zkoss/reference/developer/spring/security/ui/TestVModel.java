@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.zkoss.reference.developer.spring.security.ui;
 
@@ -10,39 +10,38 @@ import org.zkoss.reference.developer.spring.security.ui.security.SecurityUtil;
 
 /**
  * @author Ian YT Tsai (zanyking)
- *
  */
 public class TestVModel {
 
-	private String firstName = "";
-	private String lastName = "";
-	
+    private String firstName = "";
+    private String lastName = "";
 
-	public String getFirstName() {
-		return firstName;
-	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getFullName(){
-		return firstName+ " "+lastName;
-	}
-	
-	@Command
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    @Command
     @NotifyChange("fullName")
-	public void doChange(){
-		if(SecurityUtil.isNoneGranted("ROLE_EDITOR")){
-			throw new AccessDeniedException("you are not an editor!");
-		}
-	}
+    public void doChange() {
+        if (SecurityUtil.isNoneGranted("ROLE_EDITOR")) {
+            throw new AccessDeniedException("you are not an editor!");
+        }
+    }
 }
