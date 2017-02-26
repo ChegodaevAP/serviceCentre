@@ -27,4 +27,6 @@ public interface DirectoryService {
 
     List<Status> getAllStatus();
 
+    Status getDefaultStatusOnCreate();
+
 }

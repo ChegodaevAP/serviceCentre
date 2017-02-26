@@ -39,4 +39,16 @@ public class StatusDao {
         }
         return status;
     }
+    @Transactional
+    public Status findStatusById(Integer id) {
+        Query query = entityManager.createQuery("select p from Place as p where p.id=:id")
+                .setParameter("id", id);
+        Status status;
+        try {
+            status = (Status) query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+        return status;
+    }
 }

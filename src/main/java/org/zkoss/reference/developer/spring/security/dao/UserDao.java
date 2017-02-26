@@ -40,6 +40,7 @@ public class UserDao {
         User user = (User) query.getSingleResult();
         if (user != null) {
             Hibernate.initialize(user.getUserProfiles());
+            Hibernate.initialize(user.getPlace());
         }
         return user;
     }

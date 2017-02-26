@@ -7,6 +7,7 @@
         height="80%"
         width="50%"
         closable="true"
+        onClose="@command('close')"
         apply="org.zkoss.bind.BindComposer"
         action="show: slideDown;hide: slideUp"
         viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.ClientListVM')">
@@ -18,8 +19,8 @@
                     Адрес:
                     <textbox value="@bind(vm.keyWord)"/>
                     <button label="Поиск" image="/images/search.png" onClick="@command('search')"/>
-                    <button label="Добавить" image="/images/search.png" onClick="@command('addClient')"/>
-                    <button label="Обновить" image="/images/search.png" />
+                    <button label="Добавить" image="/images/search.png" onClick="@command('addClient') @global-command('refresh')"/>
+                    <button label="Обновить" image="/images/search.png" onClick="@global-command('refresh')" />
                 </hbox>
                 <listbox  height="100%" model="@bind(vm.clientListModel)" emptyMessage="Клиентов не найдено"
                           selectedItem="@bind(vm.selectedClient)" style="margin-top:10px"

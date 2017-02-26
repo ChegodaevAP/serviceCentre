@@ -43,4 +43,9 @@ public class DirectoryServiceImpl implements DirectoryService {
     public List<Status> getAllStatus() {
         return statusDao.getAllStatus();
     }
+
+    @Override
+    public Status getDefaultStatusOnCreate() {
+        return statusDao.findStatusById(1);
+    }
 }

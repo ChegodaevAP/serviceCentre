@@ -21,7 +21,6 @@
     </bean>
 
     <tx:annotation-driven />
-    <context:component-scan base-package="org.zkoss.reference.developer.jpa" />
     <import resource="applicationContext-security.xml"/>
 
 </beans>

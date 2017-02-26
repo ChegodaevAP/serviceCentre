@@ -1,9 +1,8 @@
 package org.zkoss.reference.developer.spring.security.ui;
 
-import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.reference.developer.spring.security.model.Client;
-import org.zkoss.reference.developer.spring.security.model.Order;
+import org.zkoss.reference.developer.spring.security.model.Request;
 import org.zkoss.reference.developer.spring.security.service.ClientService;
 import org.zkoss.reference.developer.spring.security.service.OrderService;
 import org.zkoss.zk.ui.Executions;
@@ -11,21 +10,21 @@ import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
-import org.zkoss.zul.ListModel;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @VariableResolver(DelegatingVariableResolver.class)
 public class CreateOrderVM {
-    private final String INSERT_ERROR = "Запись уже существует";
-    private final String INSERT_SUCSSES = "Успешно";
-    private final String CREATE_CLIENT = "/create-client.zul";
+    public static final String INSERT_ERROR = "Запись уже существует";
+    //TODO: опечатка
+    public static final String INSERT_SUCSSES = "Успешно";
+    public static final String CREATE_CLIENT = "/create-client.zul";
+    public static final String CLIENT_LIST = "/client-list.zul";
+    public static final String SELECTED_CLIENT = "refreshSelectedClient";
     private Window window;
-    private Order order;
-    private ListModel<String> clients;
+    private Request order;
+    private Client client;
 
     @WireVariable
     private OrderService orderService;
@@ -39,13 +38,13 @@ public class CreateOrderVM {
         for(Client client:clientService.getAllClient()){
             list.add(client.getName() + " " + client.getMidleName() + " " + client.getSurname());
         }
-        clients = new ListModelList<String>(list);
         this.window = window;
-        order = new Order();
+        order = new Request();
     }
 
     @Command
     public void create() {
+        order.setClient(client);
         if (orderService.insertOrder(order) == null) {
             Clients.showNotification(INSERT_ERROR);
         } else {
@@ -55,24 +54,29 @@ public class CreateOrderVM {
     }
 
     @Command
-    public void newClient() {
-        Window wind = (Window) Executions.createComponents(CREATE_CLIENT, window, null);
+    public void selectClient() {
+        Window wind = (Window) Executions.createComponents(CLIENT_LIST, window, null);
         wind.doModal();
     }
+    @GlobalCommand(SELECTED_CLIENT)
+    @NotifyChange({"selectedClient"})
+    public void refreshSelectedClient(@BindingParam("value") Client selectedClient) {
+        this.client = selectedClient;
+    }
 
-    public Order getOrder() {
+    public Request getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(Request order) {
         this.order = order;
     }
 
-    public ListModel<String> getClients() {
-        return clients;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClients(ListModel<String> clients) {
-        this.clients = clients;
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

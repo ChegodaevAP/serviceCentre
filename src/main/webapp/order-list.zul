@@ -5,7 +5,7 @@
         width="80%"
         apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.OrderListVM')">
-    <borderlayout width="900px" height="840px" >
+    <borderlayout width="900px" height="840px">
         <west size="60%" flex="true">
             <div>
                 <hbox align="center">
@@ -42,9 +42,49 @@
                             <label value="@bind(vm.selectedOrder.id)" style="font-weight:bold"/>
                         </hlayout>
                         <hlayout>
-                            Описание :
-                            <label value="@bind(vm.selectedOrder.description)" style="font-weight:bold"/>
+                            Дата :
+                            <datebox value="@bind(vm.selectedOrder.date)"/>
                         </hlayout>
+                        <hlayout>
+                            Клиент :
+                            <label value="@bind(vm.selectedOrder.client.name)"/>
+                        </hlayout>
+                        История перемещений :
+                        <listbox height="100%" model="@bind(vm.selectedOrder.movementHistory)"
+                                 emptyMessage="Перемещений по данному заказу не происходило"
+                                 style="margin-top:10px"
+                                 mold="paging" pageSize="5">
+                            <listhead>
+                                <listheader width="20%" label="Дата"/>
+                                <listheader width="20%" label="Адрес"/>
+                            </listhead>
+                            <template name="model">
+                                <listitem>
+                                    <listcell>
+                                        <datebox value="@bind(each.date)"/>
+                                    </listcell>
+                                    <listcell label="@bind(each.place.address)"></listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                        История статусов:
+                        <listbox height="100%" model="@bind(vm.selectedOrder.statusHistories)"
+                                 emptyMessage="Статусов не найдено"
+                                 style="margin-top:10px"
+                                 mold="paging" pageSize="5">
+                            <listhead>
+                                <listheader width="20%" label="Дата"/>
+                                <listheader width="20%" label="Статус"/>
+                            </listhead>
+                            <template name="model">
+                                <listitem>
+                                    <listcell>
+                                        <datebox value="@bind(each.date)"/>
+                                    </listcell>
+                                    <listcell label="@bind(each.status.status)"></listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
                     </vbox>
                 </hbox>
             </div>

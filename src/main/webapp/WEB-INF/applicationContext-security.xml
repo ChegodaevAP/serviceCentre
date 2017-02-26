@@ -57,7 +57,7 @@
 
     <authentication-manager>
         <authentication-provider user-service-ref="myUserDetailsService">
-            <password-encoder hash="md5"/>
+            <password-encoder ref="bcryptEncode"/>
         </authentication-provider>
     </authentication-manager>
 
@@ -73,10 +73,8 @@
         </authentication-provider>
     </authentication-manager>
      -->
-    <beans:bean id="encoder"
-                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-        <beans:constructor-arg name="strength" value="11"/>
-    </beans:bean>
+    <beans:bean id="bcryptEncode"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
     <global-method-security secured-annotations="enabled"/>
 </beans:beans>

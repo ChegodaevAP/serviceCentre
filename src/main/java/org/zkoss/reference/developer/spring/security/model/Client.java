@@ -1,15 +1,13 @@
 package org.zkoss.reference.developer.spring.security.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "KLIENT")
-public class Client implements Serializable{
+@Table(name = "CLIENT")
+public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -31,7 +29,7 @@ public class Client implements Serializable{
     private String phone;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
-    private Set<Order> orders = new HashSet<Order>();
+    private Set<Request> orders = new HashSet<Request>();
 
     public Integer getId() {
         return id;
@@ -81,11 +79,11 @@ public class Client implements Serializable{
         this.phone = phone;
     }
 
-    public Set<Order> getOrders() {
+    public Set<Request> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> orders) {
+    public void setOrders(Set<Request> orders) {
         this.orders = orders;
     }
 }

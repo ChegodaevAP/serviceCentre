@@ -5,7 +5,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
-import org.zkoss.reference.developer.spring.security.model.Order;
+import org.zkoss.reference.developer.spring.security.model.Request;
 import org.zkoss.reference.developer.spring.security.service.OrderService;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -15,22 +15,22 @@ import org.zkoss.zul.Window;
 
 public class OrderListVM {
 
-    private final String CREATE_ORDER = "/create-order.zul";
+    public static final String CREATE_ORDER = "/create-order.zul";
     private Window window;
     @WireVariable
     private OrderService orderService;
 
-    private ListModel<Order> orderListModel;
+    private ListModel<Request> orderListModel;
 
-    private Order selectedOrder;
+    private Request selectedOrder;
 
     private String keyWord;
 
     @Init(superclass = true)
     public void init(@ContextParam(ContextType.COMPONENT) Window window) {
         this.window = window;
-        orderListModel = new ListModelList<Order>(orderService.getAllOrder());
-        ((ListModelList<Order>) orderListModel).setMultiple(true);
+        orderListModel = new ListModelList<Request>(orderService.getAllOrder());
+        ((ListModelList<Request>) orderListModel).setMultiple(true);
     }
 
     @Command
@@ -44,19 +44,19 @@ public class OrderListVM {
 
     }
 
-    public ListModel<Order> getOrderListModel() {
+    public ListModel<Request> getOrderListModel() {
         return orderListModel;
     }
 
-    public void setOrderListModel(ListModel<Order> orderListModel) {
+    public void setOrderListModel(ListModel<Request> orderListModel) {
         this.orderListModel = orderListModel;
     }
 
-    public Order getSelectedOrder() {
+    public Request getSelectedOrder() {
         return selectedOrder;
     }
 
-    public void setSelectedOrder(Order selectedOrder) {
+    public void setSelectedOrder(Request selectedOrder) {
         this.selectedOrder = selectedOrder;
     }
 

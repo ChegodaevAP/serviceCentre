@@ -10,14 +10,30 @@
         apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.CreateOrderVM')"
         closable="true">
-    <style src="/css/style.css"/>
-    <groupbox form="@id('order') @load(vm.order) @save(vm.order, before={'create'})" width="100%">
-        <label value="Описание"/>
-        <textbox value="@bind(order.description)" id="address" constraint="no empty"/>
-        <chosenbox sclass="mailinput" hflex="1"
-                   model="@load(vm.clients)"
-                   emptyMessage="Выберите клиента"/>
-        <button label="Добавить клиента" onClick="@command('newClient')"/>
-    </groupbox>
-    <button id="createPlace" label="Создать" onClick="@command('create')"/>
+    <borderlayout width="900px" height="840px">
+        <west size="60%" flex="true">
+            <groupbox form="@id('order') @load(vm.order) @save(vm.order, before={'create'})" width="100%">
+                <label value="Описание"/>
+                <textbox value="@bind(order.description)"/>
+
+                <button label="Выбрать клиента" onClick="@command('selectClient')"/>
+                <button id="createOrder" label="Создать" onClick="@command('create')"/>
+            </groupbox>
+
+        </west>
+        <east size="40%" splittable="true" collapsible="true">
+            <hbox style="margin-top:20px">
+            <vbox>
+            <hlayout>
+                №:
+                <label value="@bind(vm.client.id)" style="font-weight:bold"/>
+                Имя:
+                <label value="@bind(vm.client.name)" style="font-weight:bold"/>
+            </hlayout>
+            </vbox>
+            </hbox>
+        </east>
+
+
+    </borderlayout>
 </window>
