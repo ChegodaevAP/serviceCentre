@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.zkoss.reference.developer.spring.security.ui.CreateOrderVM.SELECTED_CLIENT;
+import static org.zkoss.reference.developer.spring.security.ui.CreateRequestVM.SELECTED_CLIENT;
 
 @VariableResolver(DelegatingVariableResolver.class)
 public class ClientListVM {

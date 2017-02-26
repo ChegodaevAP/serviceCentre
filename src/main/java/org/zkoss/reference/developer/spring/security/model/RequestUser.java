@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "REQUEST_USER")
-public class OrderUser {
+public class RequestUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class OrderUser {
     @NotEmpty
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REQUEST_ID", nullable = false)
-    private Request order;
+    private Request request;
 
     @NotEmpty
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,12 +44,12 @@ public class OrderUser {
         this.date = date;
     }
 
-    public Request getOrder() {
-        return order;
+    public Request getRequest() {
+        return request;
     }
 
-    public void setOrder(Request order) {
-        this.order = order;
+    public void setRequest(Request request) {
+        this.request = request;
     }
 
     public User getUser() {

@@ -4,7 +4,7 @@ import org.zkoss.bind.annotation.*;
 import org.zkoss.reference.developer.spring.security.model.Client;
 import org.zkoss.reference.developer.spring.security.model.Request;
 import org.zkoss.reference.developer.spring.security.service.ClientService;
-import org.zkoss.reference.developer.spring.security.service.OrderService;
+import org.zkoss.reference.developer.spring.security.service.RequestService;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -15,7 +15,7 @@ import org.zkoss.zul.Window;
 import java.util.*;
 
 @VariableResolver(DelegatingVariableResolver.class)
-public class CreateOrderVM {
+public class CreateRequestVM {
     public static final String INSERT_ERROR = "Запись уже существует";
     //TODO: опечатка
     public static final String INSERT_SUCSSES = "Успешно";
@@ -23,11 +23,11 @@ public class CreateOrderVM {
     public static final String CLIENT_LIST = "/client-list.zul";
     public static final String SELECTED_CLIENT = "refreshSelectedClient";
     private Window window;
-    private Request order;
+    private Request request;
     private Client client;
 
     @WireVariable
-    private OrderService orderService;
+    private RequestService requestService;
     @WireVariable
     private ClientService clientService;
 
@@ -39,13 +39,13 @@ public class CreateOrderVM {
             list.add(client.getName() + " " + client.getMidleName() + " " + client.getSurname());
         }
         this.window = window;
-        order = new Request();
+        request = new Request();
     }
 
     @Command
     public void create() {
-        order.setClient(client);
-        if (orderService.insertOrder(order) == null) {
+        request.setClient(client);
+        if (requestService.insertRequest(request) == null) {
             Clients.showNotification(INSERT_ERROR);
         } else {
             Clients.showNotification(INSERT_SUCSSES);
@@ -64,12 +64,12 @@ public class CreateOrderVM {
         this.client = selectedClient;
     }
 
-    public Request getOrder() {
-        return order;
+    public Request getRequest() {
+        return request;
     }
 
-    public void setOrder(Request order) {
-        this.order = order;
+    public void setRequest(Request request) {
+        this.request = request;
     }
 
     public Client getClient() {

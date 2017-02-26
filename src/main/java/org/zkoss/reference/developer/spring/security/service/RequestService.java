@@ -4,11 +4,11 @@ import org.zkoss.reference.developer.spring.security.model.Request;
 
 import java.util.List;
 
-public interface OrderService {
+public interface RequestService {
 
-    List<Request> getAllOrder();
+    List<Request> getAllRequest();
 
-    Request insertOrder(Request order);
+    Request insertRequest(Request request);
 
-    Request getOrderById(Integer id);
+    Request getRequestById(Integer id);
 }

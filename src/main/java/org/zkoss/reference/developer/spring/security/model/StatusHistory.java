@@ -27,7 +27,7 @@ public class StatusHistory {
     @NotEmpty
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REQUEST_ID", nullable = false)
-    private Request order;
+    private Request request;
 
     public Integer getId() {
         return id;

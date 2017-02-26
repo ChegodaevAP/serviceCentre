@@ -13,7 +13,7 @@
     <context:component-scan base-package="org.zkoss.reference.developer.spring.security"/>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="order"/>
+        <property name="persistenceUnitName" value="request"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

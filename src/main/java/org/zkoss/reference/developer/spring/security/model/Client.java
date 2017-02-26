@@ -29,7 +29,7 @@ public class Client implements Serializable {
     private String phone;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
-    private Set<Request> orders = new HashSet<Request>();
+    private Set<Request> requests = new HashSet<Request>();
 
     public Integer getId() {
         return id;
@@ -79,11 +79,11 @@ public class Client implements Serializable {
         this.phone = phone;
     }
 
-    public Set<Request> getOrders() {
-        return orders;
+    public Set<Request> getRequests() {
+        return requests;
     }
 
-    public void setOrders(Set<Request> orders) {
-        this.orders = orders;
+    public void setRequests(Set<Request> requests) {
+        this.requests = requests;
     }
 }

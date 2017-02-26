@@ -23,14 +23,14 @@ public class Request implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @OneToMany(mappedBy = "order")
-    private Set<OrderUser> orderUsers;
+    @OneToMany(mappedBy = "request")
+    private Set<RequestUser> requestUsers;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "request")
     private Set<StatusHistory> statusHistories;
 
     //TODO: Опечатка
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "request")
     private Set<MovementHistory> movementHistory;
 
     //TODO: Опечатка
@@ -86,11 +86,11 @@ public class Request implements Serializable {
         this.statusHistories = statusHistories;
     }
 
-    public Set<OrderUser> getOrderUsers() {
-        return orderUsers;
+    public Set<RequestUser> getRequestUsers() {
+        return requestUsers;
     }
 
-    public void setOrderUsers(Set<OrderUser> orderUsers) {
-        this.orderUsers = orderUsers;
+    public void setRequestUsers(Set<RequestUser> requestUsers) {
+        this.requestUsers = requestUsers;
     }
 }

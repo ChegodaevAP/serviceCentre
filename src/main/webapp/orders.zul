@@ -3,7 +3,7 @@
 <window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.zkoss.org/2005/zul"
         xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
-        id="orderList"
+        id="requestList"
         height="750px"
         width="800px"
         closable="false"

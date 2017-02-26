@@ -2,10 +2,10 @@ package org.zkoss.reference.developer.spring.security.sericeImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zkoss.reference.developer.spring.security.dao.OrderDao;
+import org.zkoss.reference.developer.spring.security.dao.RequestDao;
 import org.zkoss.reference.developer.spring.security.model.*;
 import org.zkoss.reference.developer.spring.security.service.DirectoryService;
-import org.zkoss.reference.developer.spring.security.service.OrderService;
+import org.zkoss.reference.developer.spring.security.service.RequestService;
 import org.zkoss.reference.developer.spring.security.service.SecurityService;
 
 import java.util.Date;
@@ -13,33 +13,33 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Service("orderService")
-public class OrderServiceImpl implements OrderService {
+@Service("requestService")
+public class RequestServiceImpl implements RequestService {
 
     @Autowired
-    private OrderDao orderDao;
+    private RequestDao requestDao;
     @Autowired
     private DirectoryService directoryService;
     @Autowired
     SecurityService securityService;
 
     @Override
-    public List<Request> getAllOrder() {
-        return orderDao.getAll();
+    public List<Request> getAllRequest() {
+        return requestDao.getAll();
     }
 
     @Override
-    public Request insertOrder(Request order) {
-        order.setOrderUsers(getOrderUserForNewOrder());
-        order.setStatusHistories(defaultStatus());
-        order.setDate(new Date());
-        return orderDao.insertOrder(order);
+    public Request insertRequest(Request request) {
+        request.setRequestUsers(getRequestUserForNewRequest());
+        request.setStatusHistories(defaultStatus());
+        request.setDate(new Date());
+        return requestDao.insertRequest(request);
     }
 
 
     @Override
-    public Request getOrderById(Integer id) {
-        return orderDao.findOrderById(id);
+    public Request getRequestById(Integer id) {
+        return requestDao.findRequestById(id);
     }
 
     private Set<StatusHistory> defaultStatus() {
@@ -52,13 +52,13 @@ public class OrderServiceImpl implements OrderService {
         statusHistories.add(statusHistory);
         return statusHistories;
     }
-    private Set<OrderUser> getOrderUserForNewOrder() {
-        OrderUser orderUser = new OrderUser();
-        orderUser.setDate(new Date());
-        orderUser.setUser(securityService.getCurrentUser());
-        Set<OrderUser> orderUsers = new HashSet<OrderUser>();
-        orderUsers.add(orderUser);
-        return orderUsers;
+    private Set<RequestUser> getRequestUserForNewRequest() {
+        RequestUser requestUser = new RequestUser();
+        requestUser.setDate(new Date());
+        requestUser.setUser(securityService.getCurrentUser());
+        Set<RequestUser> requestUsers = new HashSet<RequestUser>();
+        requestUsers.add(requestUser);
+        return requestUsers;
     }
 }
 

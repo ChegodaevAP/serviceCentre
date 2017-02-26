@@ -3,21 +3,21 @@
 <window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.zkoss.org/2005/zul"
         xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
-        id="createOrderWindow"
+        id="createRequestWindow"
         width="40%%"
         height="20%"
         title="Новый заказ на обслуживание/ремонт"
         apply="org.zkoss.bind.BindComposer"
-        viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.CreateOrderVM')"
+        viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.CreateRequestVM')"
         closable="true">
     <borderlayout width="900px" height="840px">
         <west size="60%" flex="true">
-            <groupbox form="@id('order') @load(vm.order) @save(vm.order, before={'create'})" width="100%">
+            <groupbox form="@id('request') @load(vm.request) @save(vm.request, before={'create'})" width="100%">
                 <label value="Описание"/>
-                <textbox value="@bind(order.description)"/>
+                <textbox value="@bind(request.description)"/>
 
                 <button label="Выбрать клиента" onClick="@command('selectClient')"/>
-                <button id="createOrder" label="Создать" onClick="@command('create')"/>
+                <button id="createRequest" label="Создать" onClick="@command('create')"/>
             </groupbox>
 
         </west>

@@ -22,7 +22,7 @@ public class MovementHistory {
     @NotEmpty
     @ManyToOne
     @JoinColumn(name = "REQUEST_ID", nullable = false)
-    private Request order;
+    private Request request;
 
     @NotEmpty
     @ManyToOne
@@ -46,12 +46,12 @@ public class MovementHistory {
     }
 
 
-    public Request getOrder() {
-        return order;
+    public Request getRequest() {
+        return request;
     }
 
-    public void setOrder(Request order) {
-        this.order = order;
+    public void setRequest(Request request) {
+        this.request = request;
     }
 
     public Place getPlace() {
