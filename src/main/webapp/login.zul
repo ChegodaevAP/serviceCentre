@@ -1,5 +1,5 @@
-<?page id="testZul" title="LOGIN - ZK + SPRING SECURITY INTEGRATION"?>
-<window id="loginwin" title="CUSTOM ZK + SPRING SECURITY LOGIN" border="normal" width="500px">
+<?page id="testZul" title="InfoLIfe"?>
+<window id="loginwin" title="Вход" border="normal" width="50%" height="25%">
 
     <html style="color:red" if="${not empty param.login_error}">
       <![CDATA[
@@ -9,14 +9,13 @@
     </html>
 
 	<groupbox>
-		<caption>Login</caption>
 		<!-- j_spring_security_check is default post URL processed by Spring Security AuthenticationFilter -->
 		<html:form action="j_spring_security_check" method="POST" 
 			xmlns:html="native">
     	<grid>
     		<rows>
-    			<row>User: <textbox id="u" name="j_username"/></row>
-    			<row>Password: <textbox id="p" type="password" name="j_password"/></row>
+    			<row>Логин : <textbox id="u" name="j_username"/></row>
+    			<row>Пароль : <textbox id="p" type="password" name="j_password"/></row>
     			<row spans="2">
     				<hbox>
     					<button type="reset" label="Reset" />

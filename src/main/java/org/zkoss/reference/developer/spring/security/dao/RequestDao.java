@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.zkoss.reference.developer.spring.security.model.Request;
+import org.zkoss.reference.developer.spring.security.model.RequestUser;
 import org.zkoss.reference.developer.spring.security.model.StatusHistory;
 
 import javax.persistence.EntityManager;
@@ -58,5 +59,11 @@ public class RequestDao {
         entityManager.persist(request);
         entityManager.merge(request);
         return request;
+    }
+    @Transactional
+    public RequestUser insertRequestUser(RequestUser requestUser){
+        entityManager.persist(requestUser);
+        entityManager.merge(requestUser);
+        return requestUser;
     }
 }

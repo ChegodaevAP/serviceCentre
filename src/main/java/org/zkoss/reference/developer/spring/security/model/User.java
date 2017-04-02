@@ -3,6 +3,7 @@ package org.zkoss.reference.developer.spring.security.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,15 +32,17 @@ public class User implements Serializable {
 
     @Column(name = "EMAIL", nullable = false)
     private String email;
+
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USER_HAS_USER_PROFILE",
             joinColumns = { @JoinColumn(name = "USER_ID") },
             inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
     private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
-    @NotEmpty
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PLACE_ID", nullable = false)
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "PLACE_ID")
     private Place place;
 
     public Integer getId() {

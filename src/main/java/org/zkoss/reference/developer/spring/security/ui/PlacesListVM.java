@@ -1,9 +1,7 @@
 package org.zkoss.reference.developer.spring.security.ui;
 
-import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.ContextParam;
-import org.zkoss.bind.annotation.ContextType;
-import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.*;
 import org.zkoss.reference.developer.spring.security.model.Place;
 import org.zkoss.reference.developer.spring.security.service.DirectoryService;
 import org.zkoss.zk.ui.Component;
@@ -40,6 +38,11 @@ public class PlacesListVM extends SelectorComposer<Component> {
     @Command
     public void search() {
 
+    }
+    @Command
+    @NotifyChange("placeListModel")
+    public void refresh(){
+        init(window);
     }
 
     @Command

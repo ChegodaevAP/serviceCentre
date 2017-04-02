@@ -2,6 +2,7 @@ package org.zkoss.reference.developer.spring.security.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.zkoss.reference.developer.spring.security.model.MovementHistory;
 import org.zkoss.reference.developer.spring.security.model.Place;
 
 import javax.persistence.EntityManager;
@@ -38,6 +39,13 @@ public class PlaceDao {
             return null;
         }
         return place;
+    }
+
+    @Transactional
+    public MovementHistory insertInToMovementHistory(MovementHistory movementHistory){
+        entityManager.persist(movementHistory);
+        entityManager.merge(movementHistory);
+        return movementHistory;
     }
 
 }

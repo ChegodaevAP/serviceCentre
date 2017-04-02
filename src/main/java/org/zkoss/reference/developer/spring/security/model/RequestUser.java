@@ -1,7 +1,5 @@
 package org.zkoss.reference.developer.spring.security.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -18,13 +16,13 @@ public class RequestUser {
     @Column(name = "DATE", nullable = false)
     private Date date;
 
-    @NotEmpty
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REQUEST_ID", nullable = false)
     private Request request;
 
-    @NotEmpty
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false)
     private User user;
 

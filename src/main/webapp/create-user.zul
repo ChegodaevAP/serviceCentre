@@ -8,13 +8,8 @@
         viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.security.CreateUserVM')"
         closable="true">
 
-        <caption>
-            <button label="Login" if="${empty execution.userPrincipal}" href="/login.zul"/>
-            <button label="Logout" disabled="${empty execution.userPrincipal}" href="/j_spring_security_logout"/>
-        </caption>
-
         <groupbox form="@id('user') @load(vm.user) @save(vm.user, before={'create'})">
-            <caption>create.user</caption>
+            <caption>Создание пользователя</caption>
             <grid>
                 <columns>
                     <column/>
@@ -22,30 +17,30 @@
                 </columns>
                 <rows>
                     <row>
-                        <label value="user.name"/>
+                        <label value="Имя"/>
                         <textbox value="@bind(user.name)" id="name"/>
                     </row>
                     <row>
-                        <label value="user.secondName"/>
+                        <label value="Отчество"/>
                         <textbox value="@bind(user.secondName)"/>
                     </row>
                     <row>
-                        <label value="user.familyName"/>
+                        <label value="Фамилия"/>
                         <textbox value="@bind(user.familyName)"/>
                     </row>
                     <row>
-                        <label value="user.email"/>
+                        <label value="E-mail"/>
                         <textbox value="@bind(user.email)" constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address"/>
                     </row>
                     <row>
-                        <label value="user.password"/>
+                        <label value="Пароль"/>
                         <textbox value="@bind(user.password)" type="password"/>
                     </row>
                 </rows>
             </grid>
         </groupbox>
     <hbox width="600px">
-    <button id="action.create" label="${lables.action.create}" onClick="@command('create')" />
+    <button id="action.create" label="Создать" onClick="@command('create')" />
     <button id="action.select.roles" onClick="@command('showRoleList')"/>
     </hbox>
 </window>

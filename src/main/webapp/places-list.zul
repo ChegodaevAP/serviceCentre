@@ -1,58 +1,50 @@
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<window
-        id="placeList"
-        title="Адреса приемных пунктов"
-        border="normal"
-        height="80%"
-        width="50%"
-        closable="true"
+<window width="800px"
+        height="800px"
         apply="org.zkoss.bind.BindComposer"
-        action="show: slideDown;hide: slideUp"
         viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.PlacesListVM')">
-
-    <borderlayout>
-        <west size="60%" flex="true" >
-            <div>
-                <hbox align="center">
-                    Адрес:
-                    <textbox value="@bind(vm.keyWord)"/>
-                    <button label="Поиск" image="/images/search.png" onClick="@command('search')"/>
-                    <button label="Добавить" image="/images/search.png" onClick="@command('addPlace')"/>
-                    <button label="Обновить" image="/images/search.png" onClick="refresh(placeList)"/>
-                </hbox>
-                <listbox  height="100%" model="@bind(vm.placeListModel)" emptyMessage="Адресов не найдено"
-                         selectedItem="@bind(vm.selectedPlace)" style="margin-top:10px"
-                         mold="paging" pageSize="10">
-                    <listhead>
-                        <listheader width="10%" label="№"/>
-                        <listheader width="80%" label="Адрес"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem>
-                            <listcell label="@bind(each.id)"></listcell>
-                            <listcell label="@bind(each.address)"></listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-            </div>
-        </west>
-        <east size="40%" splittable="true" collapsible="true">
-            <div>
-                <hbox style="margin-top:20px" visible="@bind(not empty vm.selectedPlace)">
-                    <vbox>
-                        <hlayout>
-                            № :
-                            <label value="@bind(vm.selectedPlace.id)" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Адресс :
-                            <label value="@bind(vm.selectedPlace.address)" style="font-weight:bold"/>
-                        </hlayout>
-                    </vbox>
-                </hbox>
-            </div>
-        </east>
-    </borderlayout>
-
+    <div width="100%" height="100%">
+        <borderlayout width="100%" height="100%">
+            <west size="60%" flex="true">
+                <div>
+                    <hbox align="center">
+                        Адрес:
+                        <textbox value="@bind(vm.keyWord)"/>
+                        <button  image="/images/search.png" onClick="@command('search')"/>
+                        <button label="Добавить"  onClick="@command('addPlace')"/>
+                        <button label="Обновить"  onClick="@command('refresh')" iconSclass="z-icon-refresh"/>
+                    </hbox>
+                    <listbox height="100%" model="@bind(vm.placeListModel)" emptyMessage="Адресов не найдено"
+                             selectedItem="@bind(vm.selectedPlace)" style="margin-top:10px"
+                             mold="paging" pageSize="10">
+                        <listhead>
+                            <listheader width="10%" label="№"/>
+                            <listheader width="80%" label="Адрес"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem>
+                                <listcell label="@bind(each.id)"></listcell>
+                                <listcell label="@bind(each.address)"></listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </div>
+            </west>
+            <east size="40%" splittable="true" collapsible="true">
+                <div>
+                    <hbox style="margin-top:20px" visible="@bind(not empty vm.selectedPlace)">
+                        <vbox>
+                            <hlayout>
+                                № :
+                                <label value="@bind(vm.selectedPlace.id)" style="font-weight:bold"/>
+                            </hlayout>
+                            <hlayout>
+                                Адресс :
+                                <label value="@bind(vm.selectedPlace.address)" style="font-weight:bold"/>
+                            </hlayout>
+                        </vbox>
+                    </hbox>
+                </div>
+            </east>
+        </borderlayout>
+    </div>
 </window>

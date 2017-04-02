@@ -1,8 +1,7 @@
 package org.zkoss.reference.developer.spring.security.service;
 
 
-import org.zkoss.reference.developer.spring.security.model.Place;
-import org.zkoss.reference.developer.spring.security.model.Status;
+import org.zkoss.reference.developer.spring.security.model.*;
 
 import java.util.List;
 
@@ -12,12 +11,14 @@ import java.util.List;
 public interface DirectoryService {
     /**
      * Получить все места
+     *
      * @return список мест
      */
     List<Place> getAllPlace();
 
     /**
      * ДОбавить новое место в БД
+     *
      * @param place Сущность место
      * @return ту же сущность, но с идентефикатором как в БД
      */
@@ -28,5 +29,9 @@ public interface DirectoryService {
     List<Status> getAllStatus();
 
     Status getDefaultStatusOnCreate();
+
+    StatusHistory addNewStatusHistory(StatusHistory statusHistory);
+
+    MovementHistory addNewMovementHistory(MovementHistory movementHistory);
 
 }

@@ -1,94 +1,34 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<window id="requestList"
-        height="80%"
-        width="80%"
+<window height="100%"
+        width="100%"
         apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.RequestListVM')">
-    <borderlayout width="900px" height="840px">
-        <west size="60%" flex="true">
-            <div>
-                <hbox align="center">
-                    Адрес:
-                    <textbox value="@bind(vm.keyWord)"/>
-                    <button label="Поиск" image="/images/search.png" onClick="@command('search')"/>
-                    <button label="Добавить" image="/images/search.png" onClick="@command('addRequest')"/>
-                    <button label="Обновить" image="/images/search.png" onClick="refresh(placeList)"/>
-                </hbox>
-                <listbox height="100%" model="@bind(vm.requestListModel)" emptyMessage="Заказов не Найдено"
-                         selectedItem="@bind(vm.selectedRequest)" style="margin-top:10px"
-                         mold="paging" pageSize="10">
-                    <listhead>
-                        <listheader width="10%" label="№"/>
-                        <listheader width="20%" label="Дата"/>
-                        <listheader width="70%" label="Описание"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem>
-                            <listcell label="@bind(each.id)"></listcell>
-                            <listcell label="@bind(each.date)"></listcell>
-                            <listcell label="@bind(each.description)"></listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-            </div>
-        </west>
-        <east size="40%" splittable="true" collapsible="true">
-            <div>
-                <hbox style="margin-top:20px" visible="@bind(not empty vm.selectedRequest)">
-                    <vbox>
-                        <hlayout>
-                            № :
-                            <label value="@bind(vm.selectedRequest.id)" style="font-weight:bold"/>
-                        </hlayout>
-                        <hlayout>
-                            Дата :
-                            <datebox value="@bind(vm.selectedRequest.date)"/>
-                        </hlayout>
-                        <hlayout>
-                            Клиент :
-                            <label value="@bind(vm.selectedRequest.client.name)"/>
-                        </hlayout>
-                        История перемещений :
-                        <listbox height="100%" model="@bind(vm.selectedRequest.movementHistory)"
-                                 emptyMessage="Перемещений по данному заказу не происходило"
-                                 style="margin-top:10px"
-                                 mold="paging" pageSize="5">
-                            <listhead>
-                                <listheader width="20%" label="Дата"/>
-                                <listheader width="20%" label="Адрес"/>
-                            </listhead>
-                            <template name="model">
-                                <listitem>
-                                    <listcell>
-                                        <datebox value="@bind(each.date)"/>
-                                    </listcell>
-                                    <listcell label="@bind(each.place.address)"></listcell>
-                                </listitem>
-                            </template>
-                        </listbox>
-                        История статусов:
-                        <listbox height="100%" model="@bind(vm.selectedRequest.statusHistories)"
-                                 emptyMessage="Статусов не найдено"
-                                 style="margin-top:10px"
-                                 mold="paging" pageSize="5">
-                            <listhead>
-                                <listheader width="20%" label="Дата"/>
-                                <listheader width="20%" label="Статус"/>
-                            </listhead>
-                            <template name="model">
-                                <listitem>
-                                    <listcell>
-                                        <datebox value="@bind(each.date)"/>
-                                    </listcell>
-                                    <listcell label="@bind(each.status.status)"></listcell>
-                                </listitem>
-                            </template>
-                        </listbox>
-                    </vbox>
-                </hbox>
-            </div>
-        </east>
-    </borderlayout>
-
+    <div>
+        <hbox align="center">
+            Адрес:
+            <textbox value="@bind(vm.keyWord)"/>
+            <button label="Поиск" image="/images/search.png" onClick="@command('search')"/>
+            <button label="Добавить" onClick="@command('addRequest')"/>
+            <button label="Обновить" iconSclass="z-icon-refresh" onClick="@command('refresh')"/>
+        </hbox>
+        <listbox height="100%" model="@bind(vm.requestListModel)"
+                 onDoubleClick="@command('viewRequest')"
+                 emptyMessage="Заказов не Найдено"
+                 selectedItem="@bind(vm.selectedRequest)" style="margin-top:10px"
+                 mold="paging" pageSize="20">
+            <listhead>
+                <listheader width="10%" label="№"/>
+                <listheader width="20%" label="Дата"/>
+                <listheader width="70%" label="Описание"/>
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell label="@bind(each.id)"></listcell>
+                    <listcell label="@bind(each.date)"></listcell>
+                    <listcell label="@bind(each.description)"></listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </div>
 </window>

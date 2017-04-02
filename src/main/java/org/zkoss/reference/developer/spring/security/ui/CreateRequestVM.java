@@ -12,6 +12,9 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
 import org.zkoss.zul.Window;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @VariableResolver(DelegatingVariableResolver.class)
 public class CreateRequestVM {
     public static final String INSERT_ERROR = "Запись уже существует";
@@ -35,6 +38,7 @@ public class CreateRequestVM {
     }
 
     @Command
+    @NotifyChange("requestListModel")
     public void create() {
         request.setClient(client);
         if (requestService.insertRequest(request) == null) {
@@ -48,11 +52,13 @@ public class CreateRequestVM {
     @Command
     public void selectClient() {
         Window wind = (Window) Executions.createComponents(CLIENT_LIST, window, null);
+        wind.setTitle("Выберите клиента");
+        wind.setClosable(true);
         wind.doModal();
     }
 
     @GlobalCommand(SELECTED_CLIENT)
-    @NotifyChange({"selectedClient"})
+    @NotifyChange("client")
     public void refreshSelectedClient(@BindingParam("value") Client selectedClient) {
         this.client = selectedClient;
     }

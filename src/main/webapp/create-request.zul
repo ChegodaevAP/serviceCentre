@@ -24,11 +24,15 @@
         <east size="40%" splittable="true" collapsible="true">
             <hbox style="margin-top:20px">
             <vbox>
-            <hlayout>
+            <hlayout visible="@bind(not empty vm.client)">
                 №:
-                <label value="@bind(vm.client.id)" style="font-weight:bold"/>
+                <label value="@load(vm.client.id)" style="font-weight:bold"/>
+                Фамилия:
+                <label value="@load(vm.client.surname)" style="font-weight:bold"/>
                 Имя:
-                <label value="@bind(vm.client.name)" style="font-weight:bold"/>
+                <label value="@load(vm.client.name)" style="font-weight:bold"/>
+                Отчество:
+                <label value="@load(vm.client.midleName)" style="font-weight:bold"/>
             </hlayout>
             </vbox>
             </hbox>

@@ -3,6 +3,7 @@ package org.zkoss.reference.developer.spring.security.dao;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.zkoss.reference.developer.spring.security.model.Status;
+import org.zkoss.reference.developer.spring.security.model.StatusHistory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,7 +42,7 @@ public class StatusDao {
     }
     @Transactional
     public Status findStatusById(Integer id) {
-        Query query = entityManager.createQuery("select p from Place as p where p.id=:id")
+        Query query = entityManager.createQuery("select p from Status as p where p.id=:id")
                 .setParameter("id", id);
         Status status;
         try {
@@ -50,5 +51,11 @@ public class StatusDao {
             return null;
         }
         return status;
+    }
+    @Transactional
+    public StatusHistory insertInToStatusHistory(StatusHistory statusHistory){
+        entityManager.persist(statusHistory);
+        entityManager.merge(statusHistory);
+        return statusHistory;
     }
 }

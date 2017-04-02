@@ -1,13 +1,11 @@
 package org.zkoss.reference.developer.spring.security.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "movement_history")
+@Table(name = "MOVEMENT_HISTORY")
 public class MovementHistory {
 
     @Id
@@ -19,12 +17,12 @@ public class MovementHistory {
     @Column(name = "DATE")
     private Date date;
 
-    @NotEmpty
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "REQUEST_ID", nullable = false)
     private Request request;
 
-    @NotEmpty
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "PLACE_ID")
     private Place place;

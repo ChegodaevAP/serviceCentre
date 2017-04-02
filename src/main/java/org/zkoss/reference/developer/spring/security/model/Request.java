@@ -32,8 +32,8 @@ public class Request implements Serializable {
     @OneToMany(mappedBy = "request")
     private Set<MovementHistory> movementHistory;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CLIENT_ID", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "CLIENT_ID")
     private Client client;
 
     public Integer getId() {

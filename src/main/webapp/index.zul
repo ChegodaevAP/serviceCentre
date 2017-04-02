@@ -1,44 +1,62 @@
-<?page title="ZK + Spring Security Integration demo"?>
-<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://www.zkoss.org/2005/zul"
-        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
-        id="index"
-        closable="false"
-        apply="org.zkoss.bind.BindComposer"
-        viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.IndexVM')">
-    <panel border="normal" title="ZK Report Viewer">
-        <panelchildren>
-            <menubar id="menubar" width="100%">
-                <menu label="Справочники">
-                    <menupopup>
-                        <menuitem label="Места" onClick="@command('showPlaces')"/>
-                        <menuitem label="Статусы" onClick="@command('showStatus')"/>
-                        <menuitem label="Клиенты" onClick="@command('showClients')"/>
-                    </menupopup>
-                </menu>
-                <menu label="User">
-                    <menupopup>
-                        <menuitem label="Login" if="${empty execution.userPrincipal}" href="/login.zul"/>
-                        <menuitem label="Logout" disabled="${empty execution.userPrincipal}"
-                                  href="/j_spring_security_logout"/>
-                        <menuitem label="Create User" disabled="${empty execution.userPrincipal}"
-                                  href="/create-user.zul"/>
-                    </menupopup>
-                </menu>
-            </menubar>
+<?page title="InfoLife"?>
+<?component name="button" extends="button" width="44px" height="44px"?>
+<?link rel="stylesheet" type="text/css"    href="/applications/bootstrap/css/bootstrap.css" ?>
+<?link rel="stylesheet" type="text/css" href="/applications/css/index.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+        href="/applications/css/user-nav.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+        href="/applications/css/sidebar.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+        href="/applications/css/search.css.dsp" ?>
+<?link rel="stylesheet" type="text/css"
+        href="/applications/css/content-header.css.dsp" ?>
+<?link id="theme" rel="stylesheet" type="text/css"
+        href="/applications/css/grey.css.dsp"  if="${param.theme eq 'grey' or empty param.theme}"?>
+<?link id="theme" rel="stylesheet" type="text/css"
+        href="/applications/css/red.css.dsp"  if="${param.theme eq 'red'}"?>
+<?link id="theme" rel="stylesheet" type="text/css"
+        href="/applications/css/light-blue.css.dsp"  if="${param.theme eq 'light-blue'}"?>
+<window apply="org.zkoss.bind.BindComposer"
+     viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.IndexVM')">
 
-            <div height="100%" sclass="footer">
-                <!--<hlayout>-->
-                    <!--Hello!-->
-                    <!--<label value="${empty execution.userPrincipal.name?-->
-				<!--'anonymous' : execution.userPrincipal.name }"/>-->
-                <!--</hlayout>-->
-                <include src="request-list.zul"/>
-            </div>
-        </panelchildren>
-    </panel>
-    <button label="Users" href="/user-list.zul" sclass="myButton"/>
-    <button label="create.user" href="/create-user.zul"/>
+    <zk xmlns:n="native">
+        <div sclass="header">
+            <n:h1>
+                <a>InfoLife</a>
+            </n:h1>
+        </div>
+
+        <div sclass="user-nav">
+            <menubar>
+                <menu iconSclass="icon icon-white icon-user" label="Profile">
+                    <menupopup sclass="navpp">
+                        <menuitem label="Профиль"/>
+                        <menuitem label="Статистика"/>
+                        <menuitem label="Создать пользователя" onClick="@command('createUser')"/>
+                    </menupopup>
+                </menu>
+                <menuitem iconSclass="icon icon-white icon-cog" label="Settings"/>
+                <menuitem iconSclass="icon icon-white icon-share-alt" label="Logout"
+                          disabled="${empty execution.userPrincipal}"
+                          href="/j_spring_security_logout"/>
+            </menubar>
+        </div>
+
+        <navbar orient="vertical" sclass="sidebar">
+            <navitem iconSclass="icon icon-white icon-home" label="Заказы" selected="true"
+                     onClick="@command('showRequests')"/>
+            <nav iconSclass="icon icon-white icon-th-list" label="Справочники">
+                <navitem label="Места" onClick="@command('showPlaces')"/>
+                <navitem label="Статусы" onClick="@command('showStatus')"/>
+                <navitem label="Клиенты" onClick="@command('showClients')"/>
+            </nav>
+        </navbar>
+
+        <div sclass="content" height="100">
+            <include src="@load(vm.currentPage)"/>
+        </div>
+        <script src="js/excanvas.min.js" type="" if="${zk.ie lt 9}"></script>
+        <script src="js/jquery.flot.min.js"></script>
+        <script src="js/jquery.peity.min.js"></script>
+    </zk>
 </window>

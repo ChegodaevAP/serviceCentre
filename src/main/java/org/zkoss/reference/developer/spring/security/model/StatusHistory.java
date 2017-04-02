@@ -1,7 +1,5 @@
 package org.zkoss.reference.developer.spring.security.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -14,17 +12,15 @@ public class StatusHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     @Temporal(TemporalType.DATE)
-    @Column(name = "DATE")
+    @Column(name = "DATE", nullable = false)
     private Date date;
 
-    @NotEmpty
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STATUS_ID", nullable = false)
     private Status status;
 
-    @NotEmpty
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REQUEST_ID", nullable = false)
     private Request request;
@@ -51,5 +47,13 @@ public class StatusHistory {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
     }
 }

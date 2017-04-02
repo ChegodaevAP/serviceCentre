@@ -1,45 +1,64 @@
 package org.zkoss.reference.developer.spring.security.ui;
 
-import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.ContextParam;
-import org.zkoss.bind.annotation.ContextType;
-import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
 import org.zkoss.zul.Window;
 
+import java.util.Map;
+
 @VariableResolver(DelegatingVariableResolver.class)
 public class IndexVM {
-    private final String PLACES_LIST = "/places-list.zul";
-    private final String STATUS_LIST = "/status-list.zul";
-    private final String CLIENT_LIST = "/client-list.zul";
+    private final String PLACES_LIST = "places-list.zul";
+    private final String STATUS_LIST = "status-list.zul";
+    private final String CLIENT_LIST = "client-list.zul";
+    private final String REQUEST_LIST = "request-list.zul";
+    private final String CREATE_USER = "create-user.zul";
 
     private Window window;
+    private String currentPage;
+    private Map<String, Map<String, NavigationPage>> pageMap;
 
     @Init(superclass = true)
     public void init(@ContextParam(ContextType.COMPONENT) Window window) {
+        currentPage = REQUEST_LIST;
         this.window = window;
     }
 
     @Command
+    @NotifyChange("currentPage")
+    public void showRequests() {
+        currentPage = REQUEST_LIST;
+    }
+
+    @Command
+    @NotifyChange("currentPage")
     public void showPlaces() {
-        Window wind = (Window) Executions.createComponents(
-                PLACES_LIST, null, null);
-        wind.doModal();
+        currentPage = PLACES_LIST;
     }
 
     @Command
+    @NotifyChange("currentPage")
     public void showStatus() {
-        Window wind = (Window) Executions.createComponents(
-                STATUS_LIST, null, null);
-        wind.doModal();
+        currentPage = STATUS_LIST;
     }
 
     @Command
+    @NotifyChange("currentPage")
     public void showClients() {
-        Window wind = (Window) Executions.createComponents(
-                CLIENT_LIST, null, null);
+        currentPage = CLIENT_LIST;
+    }
+
+    @Command
+    public void createUser() {
+        Window wind = (Window) Executions.createComponents(CREATE_USER, window, null);
         wind.doModal();
     }
+
+
+    public String getCurrentPage() {
+        return currentPage;
+    }
+
 }

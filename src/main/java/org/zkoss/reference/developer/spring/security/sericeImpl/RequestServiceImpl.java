@@ -3,10 +3,7 @@ package org.zkoss.reference.developer.spring.security.sericeImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zkoss.reference.developer.spring.security.dao.RequestDao;
-import org.zkoss.reference.developer.spring.security.model.Request;
-import org.zkoss.reference.developer.spring.security.model.RequestUser;
-import org.zkoss.reference.developer.spring.security.model.Status;
-import org.zkoss.reference.developer.spring.security.model.StatusHistory;
+import org.zkoss.reference.developer.spring.security.model.*;
 import org.zkoss.reference.developer.spring.security.service.DirectoryService;
 import org.zkoss.reference.developer.spring.security.service.RequestService;
 import org.zkoss.reference.developer.spring.security.service.SecurityService;
@@ -33,10 +30,12 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public Request insertRequest(Request request) {
-        request.setRequestUsers(getRequestUserForNewRequest());
-        request.setStatusHistories(defaultStatus());
         request.setDate(new Date());
-        return requestDao.insertRequest(request);
+        request = requestDao.insertRequest(request);
+        addNewRequestUser(getRequestUserForNewRequest(request));
+        directoryService.addNewMovementHistory(getMovementHistoryForNewRequest(request));
+        directoryService.addNewStatusHistory(defaultStatus(request));
+        return request;
     }
 
 
@@ -45,25 +44,37 @@ public class RequestServiceImpl implements RequestService {
         return requestDao.findRequestById(id);
     }
 
-    private Set<StatusHistory> defaultStatus() {
+    @Override
+    public RequestUser addNewRequestUser(RequestUser requestUser) {
+        return requestDao.insertRequestUser(requestUser);
+    }
+
+    private StatusHistory defaultStatus(Request request) {
         Status status = directoryService.getDefaultStatusOnCreate();
         StatusHistory statusHistory = new StatusHistory();
         statusHistory.setDate(new Date());
         statusHistory.setStatus(status);
         statusHistory.setDate(new Date());
-        Set<StatusHistory> statusHistories = new HashSet<StatusHistory>();
-        statusHistories.add(statusHistory);
-        return statusHistories;
+        statusHistory.setRequest(request);
+        return statusHistory;
     }
 
-    private Set<RequestUser> getRequestUserForNewRequest() {
+    private RequestUser getRequestUserForNewRequest(Request request) {
         RequestUser requestUser = new RequestUser();
         requestUser.setDate(new Date());
         requestUser.setUser(securityService.getCurrentUser());
-        Set<RequestUser> requestUsers = new HashSet<RequestUser>();
-        requestUsers.add(requestUser);
-        return requestUsers;
+        requestUser.setRequest(request);
+        return requestUser;
     }
+
+    private MovementHistory getMovementHistoryForNewRequest(Request request){
+        MovementHistory movementHistory = new MovementHistory();
+        movementHistory.setDate(new Date());
+        movementHistory.setPlace(securityService.getCurrentUser().getPlace());
+        movementHistory.setRequest(request);
+        return movementHistory;
+    }
+
 }
 
 

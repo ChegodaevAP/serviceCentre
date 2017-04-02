@@ -1,5 +1,7 @@
 package org.zkoss.reference.developer.spring.security.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty
     @Column(name = "STATUS")
     private String status;
 
