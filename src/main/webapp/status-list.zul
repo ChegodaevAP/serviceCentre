@@ -9,9 +9,9 @@
         <hbox align="center">
             Адрес:
             <textbox value="@bind(vm.keyWord)"/>
-            <button label="Поиск" image="/images/search.png" onClick="@command('search')"/>
-            <button label="Добавить"  onClick="@command('addStatus')"/>
-            <button label="Добавить" iconSclass="z-icon-refresh" onClick="refresh(placeList)"/>
+            <button iconSclass="z-icon-search" onClick="@command('search')"/>
+            <button iconSclass="z-icon-plus"  onClick="@command('addStatus')"/>
+            <button iconSclass="z-icon-refresh" onClick="refresh(placeList)"/>
         </hbox>
         <listbox height="100%" model="@bind(vm.statusListModel)" emptyMessage="Статусов не найдено"
                  style="margin-top:10px"

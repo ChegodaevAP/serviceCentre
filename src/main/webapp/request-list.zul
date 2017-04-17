@@ -1,16 +1,13 @@
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<window height="100%"
-        width="100%"
+<window
         apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.RequestListVM')">
     <div>
         <hbox align="center">
             Адрес:
             <textbox value="@bind(vm.keyWord)"/>
-            <button label="Поиск" image="/images/search.png" onClick="@command('search')"/>
-            <button label="Добавить" onClick="@command('addRequest')"/>
-            <button label="Обновить" iconSclass="z-icon-refresh" onClick="@command('refresh')"/>
+            <button iconSclass="z-icon-search" onClick="@command('search')"/>
+            <button iconSclass="z-icon-plus" onClick="@command('addRequest')"/>
+            <button iconSclass="z-icon-refresh" onClick="@command('refresh')"/>
         </hbox>
         <listbox height="100%" model="@bind(vm.requestListModel)"
                  onDoubleClick="@command('viewRequest')"
@@ -18,7 +15,7 @@
                  selectedItem="@bind(vm.selectedRequest)" style="margin-top:10px"
                  mold="paging" pageSize="20">
             <listhead>
-                <listheader width="10%" label="№"/>
+                <listheader width="10%" label="№" sort="auto"/>
                 <listheader width="20%" label="Дата"/>
                 <listheader width="70%" label="Описание"/>
             </listhead>

@@ -1,9 +1,4 @@
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://www.zkoss.org/2005/zul"
-        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
-        id="createStatusWindow"
+<window
         width="40%%"
         height="20%"
         title="Новый приемный пункт/мастерская"
@@ -11,9 +6,9 @@
         viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.CreateStatusVM')"
         closable="true">
 
-    <groupbox form="@id('status') @load(vm.status) @save(vm.status, before={'create'})" width="100%">
+    <groupbox>
         <label value="Статус"/>
-        <textbox value="@bind(status.status)" id="status" constraint="no empty"/>
+        <textbox value="@bind(vm.status.status)" id="status" constraint="no empty"/>
     </groupbox>
     <button id="createStatus" label="Создать" onClick="@command('create')"/>
 </window>

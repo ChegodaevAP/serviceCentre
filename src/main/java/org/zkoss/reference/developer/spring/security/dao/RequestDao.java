@@ -4,6 +4,7 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.zkoss.reference.developer.spring.security.model.Report;
 import org.zkoss.reference.developer.spring.security.model.Request;
 import org.zkoss.reference.developer.spring.security.model.RequestUser;
 import org.zkoss.reference.developer.spring.security.model.StatusHistory;
@@ -65,5 +66,10 @@ public class RequestDao {
         entityManager.persist(requestUser);
         entityManager.merge(requestUser);
         return requestUser;
+    }
+    @Transactional
+    public Report getReport(){
+        Query query = entityManager.createQuery("select o from Report as o where o.id =1");
+        return (Report) query.getSingleResult();
     }
 }

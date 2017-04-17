@@ -1,9 +1,4 @@
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://www.zkoss.org/2005/zul"
-        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
-        id="createRequestWindow"
+<window
         width="40%%"
         height="20%"
         title="Новый заказ на обслуживание/ремонт"
@@ -12,12 +7,17 @@
         closable="true">
     <borderlayout width="900px" height="840px">
         <west size="60%" flex="true">
-            <groupbox form="@id('request') @load(vm.request) @save(vm.request, before={'create'})" width="100%">
+            <groupbox width="100%">
                 <label value="Описание"/>
-                <textbox value="@bind(request.description)"/>
+                <textbox value="@bind(vm.request.description)"/>
 
                 <button label="Выбрать клиента" onClick="@command('selectClient')"/>
+                <button label="Добавить неисправность" onClick="@command('selectClient')"/>
                 <button id="createRequest" label="Создать" onClick="@command('create')"/>
+                <button id="printRequest" iconSclass="z-icon-print" onClick="@command('print')"/>
+                <chosenbox hflex="1"
+                           model="@load(vm.defectListModel)"
+                           emptyMessage="choose one or more labels" />
             </groupbox>
 
         </west>

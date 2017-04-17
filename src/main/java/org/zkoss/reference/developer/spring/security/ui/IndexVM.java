@@ -15,6 +15,7 @@ public class IndexVM {
     private final String CLIENT_LIST = "client-list.zul";
     private final String REQUEST_LIST = "request-list.zul";
     private final String CREATE_USER = "create-user.zul";
+    private final String DEFECT_LIST = "defect-list.zul";
 
     private Window window;
     private String currentPage;
@@ -48,6 +49,12 @@ public class IndexVM {
     @NotifyChange("currentPage")
     public void showClients() {
         currentPage = CLIENT_LIST;
+    }
+
+    @Command
+    @NotifyChange("currentPage")
+    public void showDefects() {
+        currentPage = DEFECT_LIST;
     }
 
     @Command

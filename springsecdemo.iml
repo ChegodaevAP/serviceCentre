@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
     <facet type="web" name="Web">
       <configuration>
         <descriptors>
@@ -14,25 +17,15 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="Hibernate" />
+        <setting name="provider-name" value="" />
         <datasource-mapping>
-          <factory-entry name="request" value="202dd077-b3a0-467f-bffb-c87cad9e9f47" />
+          <factory-entry name="request" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/Resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
-    <facet type="Spring" name="Spring">
-      <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/applicationContext.xml</file>
-          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/applicationContext-security.xml</file>
-          <file>file://$MODULE_DIR$/classes/production/integration.spring.security/main/webapp/WEB-INF/applicationContext.xml</file>
-          <file>file://$MODULE_DIR$/classes/production/integration.spring.security/main/webapp/WEB-INF/applicationContext-security.xml</file>
-        </fileset>
-      </configuration>
-    </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -55,11 +48,15 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-web:3.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:3.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:3.0.7.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zkplus:7.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zk:7.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zul:7.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zkmax:7.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zkex:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zkplus:8.0.3.1-Eval" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zk:8.0.3.1-Eval" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zul:8.0.3.1-Eval" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zkmax:8.0.3.1-Eval" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.1" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zkex:8.0.3.1-Eval" level="project" />
     <orderEntry type="library" name="Maven: net.sf.jasperreports:jasperreports:4.5.1" level="project" />
     <orderEntry type="library" name="Maven: commons-digester:commons-digester:2.1" level="project" />
     <orderEntry type="library" name="Maven: com.lowagie:itext:2.1.7" level="project" />
@@ -79,14 +76,15 @@
     <orderEntry type="library" name="Maven: org.jfree:jcommon:1.0.17" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.3.04" level="project" />
     <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.zk:zkbind:7.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.common:zcommon:7.0.0" level="project" />
-    <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.common:zel:7.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.beanshell:bsh:2.0b4" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zk:zkbind:8.0.3.1-Eval" level="project" />
+    <orderEntry type="library" name="Maven: org.javassist:javassist:3.18.2-GA" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.common:zcommon:8.0.3.1-Eval" level="project" />
+    <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.3.2" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.common:zel:8.0.3.1-Eval" level="project" />
+    <orderEntry type="library" name="Maven: org.apache-extras.beanshell:bsh:2.0b6" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-jdk14:1.7.5" level="project" />
-    <orderEntry type="library" name="Maven: org.zkoss.common:zweb:7.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.common:zweb:8.0.3.1-Eval" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.8" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:1.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.zkoss.maven:yuicompressor-maven-plugin-zk:1.2.0" level="project" />
@@ -115,5 +113,12 @@
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:5.1.3.Final" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.docx:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: fr.opensagres.xdocreport:fr.opensagres.xdocreport.document:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: fr.opensagres.xdocreport:fr.opensagres.xdocreport.core:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: fr.opensagres.xdocreport:fr.opensagres.xdocreport.converter:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: fr.opensagres.xdocreport:fr.opensagres.xdocreport.template.freemarker:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: fr.opensagres.xdocreport:fr.opensagres.xdocreport.template:1.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.26-incubating" level="project" />
   </component>
 </module>

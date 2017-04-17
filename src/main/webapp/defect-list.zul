@@ -1,0 +1,29 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<window
+        onClose="@command('close')"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.DefectListVM')">
+    <hbox align="center">
+        Адрес:
+        <textbox value="@bind(vm.keyWord)"/>
+        <button iconSclass="z-icon-search" onClick="@command('search')"/>
+        <button iconSclass="z-icon-plus"  onClick="@command('addClient') @global-command('refresh')"/>
+        <button iconSclass="z-icon-refresh" onClick="@global-command('refresh')"/>
+    </hbox>
+    <listbox  model="@bind(vm.defectListModel)" emptyMessage="Неисправностей не найдено"
+              selectedItem="@bind(vm.selectedDefect)"
+              mold="paging" pageSize="10">
+        <listhead>
+            <listheader  label="№"/>
+            <listheader  label="Имя"/>
+
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="@bind(each.id)"></listcell>
+                <listcell label="@bind(each.name)"></listcell>
+            </listitem>
+        </template>
+    </listbox>
+</window>

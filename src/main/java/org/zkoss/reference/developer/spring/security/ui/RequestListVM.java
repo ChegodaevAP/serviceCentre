@@ -43,7 +43,6 @@ public class RequestListVM {
     }
 
     @Command
-    @NotifyChange("requestListModel")
     public void addRequest() {
         Window wind = (Window) Executions.createComponents(CREATE_REQUEST, window, null);
         wind.doModal();

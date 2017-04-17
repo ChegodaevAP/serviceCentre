@@ -1,4 +1,5 @@
 <?page title="InfoLife"?>
+<?link type="text/css" rel="stylesheet" href="css/style.css"?>
 <?component name="button" extends="button" width="44px" height="44px"?>
 <?link rel="stylesheet" type="text/css"    href="/applications/bootstrap/css/bootstrap.css" ?>
 <?link rel="stylesheet" type="text/css" href="/applications/css/index.css.dsp" ?>
@@ -42,21 +43,19 @@
             </menubar>
         </div>
 
-        <navbar orient="vertical" sclass="sidebar">
-            <navitem iconSclass="icon icon-white icon-home" label="Заказы" selected="true"
+        <navbar id="mainMenu" orient="vertical" sclass="sidebar menu">
+            <navitem iconSclass="icon icon-white icon-home" label="Заказы" selected="true" sclass="menu-item"
                      onClick="@command('showRequests')"/>
-            <nav iconSclass="icon icon-white icon-th-list" label="Справочники">
-                <navitem label="Места" onClick="@command('showPlaces')"/>
-                <navitem label="Статусы" onClick="@command('showStatus')"/>
-                <navitem label="Клиенты" onClick="@command('showClients')"/>
+            <nav iconSclass="icon icon-white icon-th-list" label="Справочники" sclass="menu-item">
+                <navitem label="Места" onClick="@command('showPlaces')" sclass="menu-item"/>
+                <navitem label="Статусы" onClick="@command('showStatus')" sclass="menu-item"/>
+                <navitem label="Клиенты" onClick="@command('showClients')" sclass="menu-item"/>
+                <navitem label="Неисправности" onClick="@command('showDefects')" sclass="menu-item"/>
             </nav>
         </navbar>
 
-        <div sclass="content" height="100">
+        <div sclass="content">
             <include src="@load(vm.currentPage)"/>
         </div>
-        <script src="js/excanvas.min.js" type="" if="${zk.ie lt 9}"></script>
-        <script src="js/jquery.flot.min.js"></script>
-        <script src="js/jquery.peity.min.js"></script>
     </zk>
 </window>

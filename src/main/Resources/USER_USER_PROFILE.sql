@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`client` (
   `PHONE` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`ID`))
   ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 5
   DEFAULT CHARACTER SET = utf8;
 
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`place` (
   `ADDRESS` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
   ENGINE = InnoDB
-  AUTO_INCREMENT = 29
+  AUTO_INCREMENT = 2
   DEFAULT CHARACTER SET = utf8;
 
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`request` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 29
   DEFAULT CHARACTER SET = utf8;
 
 
@@ -70,22 +70,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`movement_history` (
   `DATE` DATE NOT NULL,
   `place_id` INT(11) NOT NULL,
   `request_id` INT(11) NOT NULL,
-  `request_client_ID` INT(11) NOT NULL,
-  PRIMARY KEY (`id`, `place_id`, `request_id`, `request_client_ID`),
+  PRIMARY KEY (`id`, `place_id`, `request_id`),
   INDEX `fk_movement_history_place1_idx` (`place_id` ASC),
-  INDEX `fk_movement_history_request1_idx` (`request_id` ASC, `request_client_ID` ASC),
+  INDEX `fk_movement_history_request1_idx` (`request_id` ASC),
   CONSTRAINT `fk_movement_history_place1`
   FOREIGN KEY (`place_id`)
   REFERENCES `mydb`.`place` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_movement_history_request1`
-  FOREIGN KEY (`request_id` , `request_client_ID`)
-  REFERENCES `mydb`.`request` (`id` , `client_ID`)
+  FOREIGN KEY (`request_id`)
+  REFERENCES `mydb`.`request` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 27
   DEFAULT CHARACTER SET = utf8;
 
 
@@ -121,24 +120,22 @@ CREATE TABLE IF NOT EXISTS `mydb`.`request_user` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `DATE` DATE NOT NULL,
   `user_ID` INT(11) NOT NULL,
-  `user_place_id` INT(11) NOT NULL,
   `request_id` INT(11) NOT NULL,
-  `request_client_ID` INT(11) NOT NULL,
-  PRIMARY KEY (`ID`, `user_ID`, `user_place_id`, `request_id`, `request_client_ID`),
-  INDEX `fk_order_user_user1_idx` (`user_ID` ASC, `user_place_id` ASC),
-  INDEX `fk_order_user_request1_idx` (`request_id` ASC, `request_client_ID` ASC),
+  PRIMARY KEY (`ID`, `user_ID`, `request_id`),
+  INDEX `fk_order_user_user1_idx` (`user_ID` ASC),
+  INDEX `fk_request_user_request1_idx` (`request_id` ASC),
   CONSTRAINT `fk_order_user_user1`
-  FOREIGN KEY (`user_ID` , `user_place_id`)
-  REFERENCES `mydb`.`user` (`ID` , `place_id`)
+  FOREIGN KEY (`user_ID`)
+  REFERENCES `mydb`.`user` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_order_user_request1`
-  FOREIGN KEY (`request_id` , `request_client_ID`)
-  REFERENCES `mydb`.`request` (`id` , `client_ID`)
+  CONSTRAINT `fk_request_user_request1`
+  FOREIGN KEY (`request_id`)
+  REFERENCES `mydb`.`request` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 27
   DEFAULT CHARACTER SET = utf8;
 
 
@@ -162,22 +159,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`status_history` (
   `DATE` DATE NULL DEFAULT NULL,
   `status_ID` INT(11) NOT NULL,
   `request_id` INT(11) NOT NULL,
-  `request_client_ID` INT(11) NOT NULL,
-  PRIMARY KEY (`ID`, `status_ID`, `request_id`, `request_client_ID`),
+  PRIMARY KEY (`ID`, `status_ID`, `request_id`),
   INDEX `fk_status_history_status1_idx` (`status_ID` ASC),
-  INDEX `fk_status_history_request1_idx` (`request_id` ASC, `request_client_ID` ASC),
+  INDEX `fk_status_history_request1_idx` (`request_id` ASC),
+  CONSTRAINT `fk_status_history_request1`
+  FOREIGN KEY (`request_id`)
+  REFERENCES `mydb`.`request` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_status_history_status1`
   FOREIGN KEY (`status_ID`)
   REFERENCES `mydb`.`status` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_status_history_request1`
-  FOREIGN KEY (`request_id` , `request_client_ID`)
-  REFERENCES `mydb`.`request` (`id` , `client_ID`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 26
   DEFAULT CHARACTER SET = utf8;
 
 
@@ -216,6 +212,58 @@ CREATE TABLE IF NOT EXISTS `mydb`.`user_has_user_profile` (
   DEFAULT CHARACTER SET = utf8;
 
 
+-- -----------------------------------------------------
+-- Table `mydb`.`reports`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`reports` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `file` BLOB NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
+  ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`defect`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`defect` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+  ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`defect_request`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`defect_request` (
+  `defect_id` INT NOT NULL,
+  `request_id` INT(11) NOT NULL,
+  PRIMARY KEY (`defect_id`, `request_id`),
+  INDEX `fk_defect_has_request_request1_idx` (`request_id` ASC),
+  INDEX `fk_defect_has_request_defect1_idx` (`defect_id` ASC),
+  CONSTRAINT `fk_defect_has_request_defect1`
+  FOREIGN KEY (`defect_id`)
+  REFERENCES `mydb`.`defect` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_defect_has_request_request1`
+  FOREIGN KEY (`request_id`)
+  REFERENCES `mydb`.`request` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+
+INSERT INTO `mydb`.`place` (`id`, `ADDRESS`) VALUES ('1', 'Молочное');
+INSERT INTO `mydb`.`user` (`ID`, `NAME`, `PASSWORD`, `SECOND_NAME`, `FAMILY_NAME`, `EMAIL`, `place_id`) VALUES ('1', '1', '$2a$11$eAg.4.ixNbGvw/JvONroA.D92oZSIERGUl3oisovPUWbJBXCfm5My', '1', '1', '1', '1');
+INSERT INTO `mydb`.`status` (`ID`, `STATUS`) VALUES ('1', 'Принят');
+INSERT INTO `mydb`.`status` (`ID`, `STATUS`) VALUES ('1', 'В ремонте');

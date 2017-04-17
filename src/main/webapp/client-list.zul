@@ -1,21 +1,16 @@
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <window
-        height="80%"
-        width="50%"
         onClose="@command('close')"
         apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.ClientListVM')">
-            <div>
-                <hbox align="center">
+                <hbox width="100%" align="center">
                     Адрес:
                     <textbox value="@bind(vm.keyWord)"/>
-                    <button label="Поиск" image="/images/search.png" onClick="@command('search')"/>
-                    <button label="Добавить"  onClick="@command('addClient') @global-command('refresh')"/>
-                    <button label="Обновить" iconSclass="z-icon-refresh" onClick="@global-command('refresh')" />
+                    <button iconSclass="z-icon-search" onClick="@command('search')"/>
+                    <button iconSclass="z-icon-plus"  onClick="@command('addClient') @global-command('refresh')"/>
+                    <button iconSclass="z-icon-refresh" onClick="@global-command('refresh')" />
                 </hbox>
-                <listbox  height="100%" model="@bind(vm.clientListModel)" emptyMessage="Клиентов не найдено"
-                          selectedItem="@bind(vm.selectedClient)" style="margin-top:10px"
+                <listbox  height="100%" width="100%" model="@bind(vm.clientListModel)" emptyMessage="Клиентов не найдено"
+                          selectedItem="@bind(vm.selectedClient)"
                           mold="paging" pageSize="10">
                     <listhead>
                         <listheader width="15%" label="№"/>
@@ -36,7 +31,5 @@
                         </listitem>
                     </template>
                 </listbox>
-            </div>
-
-    <button label="Сохранить" iconSclass="z-icon-ыфму" onClick="@command('close')" visible="@load('isMenuMod')"/>
+    <button label="Сохранить" iconSclass="z-icon-save" onClick="@command('close')" visible=" not @load('isMenuMod')"/>
 </window>

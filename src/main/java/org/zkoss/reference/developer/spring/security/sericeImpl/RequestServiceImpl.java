@@ -49,6 +49,11 @@ public class RequestServiceImpl implements RequestService {
         return requestDao.insertRequestUser(requestUser);
     }
 
+    @Override
+    public Report getReport() {
+        return requestDao.getReport();
+    }
+
     private StatusHistory defaultStatus(Request request) {
         Status status = directoryService.getDefaultStatusOnCreate();
         StatusHistory statusHistory = new StatusHistory();

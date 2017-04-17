@@ -44,6 +44,7 @@ public class ClientListVM {
     }
 
     @GlobalCommand
+    @NotifyChange("clientListModel")
     public void refresh() {
         clientListModel = new ListModelList<Client>(clientService.getAllClient());
         ((ListModelList<Client>) clientListModel).setMultiple(true);
@@ -51,8 +52,6 @@ public class ClientListVM {
 
     @Command
     public void close() {
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put(CLIENT, selectedClient);
         BindUtils.postGlobalCommand(null, null, SELECTED_CLIENT,
                 Collections.<String, Object>singletonMap("value", selectedClient));
         window.onClose();

@@ -1,6 +1,6 @@
 <?page id="testZul" title="InfoLIfe"?>
-<window id="loginwin" title="Вход" border="normal" width="50%" height="25%">
-
+<window id="loginwin"   width="100%" height="100%"  style=" background-image: url(images/backgroundLogin.jpg);">
+<div align="center" style="margin-top: 15%; margin-left: 35%; margin-right: 35%;"  sclass="z-popup" >
     <html style="color:red" if="${not empty param.login_error}">
       <![CDATA[
         Your login attempt was not successful, try again.<br/><br/>
@@ -10,7 +10,7 @@
 
 	<groupbox>
 		<!-- j_spring_security_check is default post URL processed by Spring Security AuthenticationFilter -->
-		<html:form action="j_spring_security_check" method="POST" 
+		<html:form action="j_spring_security_check" method="POST"
 			xmlns:html="native">
     	<grid>
     		<rows>
@@ -18,13 +18,13 @@
     			<row>Пароль : <textbox id="p" type="password" name="j_password"/></row>
     			<row spans="2">
     				<hbox>
-    					<button type="reset" label="Reset" />
-    					<button type="submit" label="Submit" />
+    					<button type="reset" label="Сброс" />
+    					<button type="submit" label="Войти" />
     				</hbox>
     			</row>
     		</rows>
     	</grid>
     	</html:form>
     </groupbox>
-    
+</div>
 </window>

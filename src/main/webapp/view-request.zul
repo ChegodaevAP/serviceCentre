@@ -8,7 +8,6 @@
         width="50%"
         apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm') @init('org.zkoss.reference.developer.spring.security.ui.ViewRequestVM')">
-
     <div>
         <hbox style="margin-top:20px" visible="@bind(not empty vm.selectedRequest)">
             <vbox>
@@ -60,6 +59,7 @@
                         </listitem>
                     </template>
                 </listbox>
+                <button label="Добавить статус" iconSclass="z-icon-plus" onClick="@command('addStatus')"/>
             </vbox>
         </hbox>
     </div>

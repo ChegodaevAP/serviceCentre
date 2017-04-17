@@ -32,6 +32,9 @@ public class Request implements Serializable {
     @OneToMany(mappedBy = "request")
     private Set<MovementHistory> movementHistory;
 
+    @OneToMany(mappedBy = "request")
+    private Set<NeispravnostRequest> neispravnost;
+
     @ManyToOne
     @JoinColumn(name = "CLIENT_ID")
     private Client client;

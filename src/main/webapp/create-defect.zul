@@ -1,0 +1,15 @@
+<window width="40%" height="20%"
+        title="Новая неисправность"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm')  @init('org.zkoss.reference.developer.spring.security.ui.CreateDefectVM')"
+        closable="true">
+
+        <grid>
+            <rows>
+                <row>Статус : <textbox value="@bind(vm.defect.name)" id="status" constraint="no empty"/> </row>
+            </rows>
+        </grid>
+<div align="center">
+        <button iconSclass="z-icon-save" label="Создать" onClick="@command('create')"/>
+</div>
+</window>
