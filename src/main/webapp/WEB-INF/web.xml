@@ -133,6 +133,6 @@
 		<mime-type>text/html</mime-type>
 	</mime-mapping>
 	<welcome-file-list>
-		<welcome-file>index.zul</welcome-file>
+		<welcome-file>front/index.zul</welcome-file>
 	</welcome-file-list>
 </web-app>

@@ -1,0 +1,50 @@
+<window
+        width="40%%"
+        height="40%"
+        title="Новый заказ на обслуживание/ремонт"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm')  @init('ServiceCentre.ui.CreateRequestVM')"
+        closable="true">
+    <grid>
+        <rows>
+            <row>Описание :
+                <textbox value="@bind(vm.request.description)"/>
+            </row>
+            <row>Клиент :
+                <button label="Выбрать клиента" onClick="@command('selectClient')"/>
+            </row>
+            <row>
+                <button label="Добавить неисправность" onClick="@command('selectClient')"/>
+            </row>
+            <row>
+                <chosenbox sclass="selectDefect" hflex="1"
+                           model="@load(vm.defectListModel)"
+                           emptyMessage="Выберите неисправности"
+                           creatable="true" createMessage="Create new contact: {0}"
+                           onSearch="@command('newDefect', name=event.value)"/>
+            </row>
+            <row spans="2">
+                <hbox>
+
+                    <button id="createRequest" label="Создать" onClick="@command('create')"/>
+                    <button id="printRequest" iconSclass="z-icon-print" onClick="@command('print')"/>
+                </hbox>
+            </row>
+        </rows>
+    </grid>
+
+            <hbox style="margin-top:20px">
+            <vbox>
+            <hlayout visible="@bind(not empty vm.client)">
+                №:
+                <label value="@load(vm.client.id)" style="font-weight:bold"/>
+                Фамилия:
+                <label value="@load(vm.client.surname)" style="font-weight:bold"/>
+                Имя:
+                <label value="@load(vm.client.name)" style="font-weight:bold"/>
+                Отчество:
+                <label value="@load(vm.client.midleName)" style="font-weight:bold"/>
+            </hlayout>
+            </vbox>
+            </hbox>
+</window>

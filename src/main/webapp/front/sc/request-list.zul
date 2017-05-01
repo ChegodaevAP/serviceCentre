@@ -1,0 +1,25 @@
+<window
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('ServiceCentre.ui.RequestListVM')">
+    <include src="breadcrumbs.zul"/>
+    <div>
+        <listbox height="100%" model="@bind(vm.requestListModel)"
+                 onDoubleClick="@command('viewRequest')"
+                 emptyMessage="Заказов не Найдено"
+                 selectedItem="@bind(vm.selectedRequest)" style="margin-top:10px"
+                 mold="paging" pageSize="20">
+            <listhead>
+                <listheader width="10%" label="№" sort="auto"/>
+                <listheader width="20%" label="Дата"/>
+                <listheader width="70%" label="Описание"/>
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell label="@bind(each.id)"></listcell>
+                    <listcell label="@bind(each.date)"></listcell>
+                    <listcell label="@bind(each.description)"></listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </div>
+</window>

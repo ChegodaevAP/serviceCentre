@@ -1,0 +1,10 @@
+<window
+        closable="true"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('ServiceCentre.ui.ViewPlace')">
+    <script type="text/javascript" content="zk.googleAPIkey='AIzaSyAOM0lJtL484x_xI46IXjXqtxaCpQp3GvI'" />
+    <gmaps version="3.26" id="gmaps" width="520px" height="400px"  showSmallCtrl="true" showLargeCtrl="true" showScaleCtrl="true"
+           protocol="https">
+        <gmarker open="true" id="marker" content="@bind(vm.place.address)" lat="@bind('vm.lat')" lng="@bind('vm.lng')"/>
+    </gmaps>
+</window>

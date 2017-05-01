@@ -1,0 +1,10 @@
+<div sclass="breadcrumbs">
+  <!-- Search input-->
+	<div sclass="nav-search">
+		<bandbox placeholder="Search ..." sclass="input-prepend"/>
+		<button iconSclass="z-icon-search" onClick="@command('search')"/>
+		<button iconSclass="z-icon-plus" onClick="@command('add')"/>
+		<button iconSclass="z-icon-minus" onClick="@command('delete')"/>
+		<button iconSclass="z-icon-refresh" onClick="@command('refresh')"/>
+	</div>
+</div>	

@@ -1,0 +1,33 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<window
+        height="100%"
+        width="100%"
+        apply="org.zkoss.bind.BindComposer"
+        onClose="@command('close')"
+        viewModel="@id('vm') @init('ServiceCentre.ui.StatusListVM')">
+    <div>
+        <hbox align="center">
+            Адрес:
+            <textbox value="@bind(vm.keyWord)"/>
+            <button iconSclass="z-icon-search" onClick="@command('search')"/>
+            <button iconSclass="z-icon-plus" onClick="@command('addStatus')"/>
+            <button iconSclass="z-icon-refresh" onClick="refresh(placeList)"/>
+        </hbox>
+        <listbox height="100%" model="@bind(vm.statusListModel)" emptyMessage="Статусов не найдено"
+                 style="margin-top:10px"
+                 mold="paging" pageSize="10"
+                 selectedItem="@bind(vm.selectedStatus)">
+            <listhead>
+                <listheader width="10%" label="№"/>
+                <listheader width="80%" label="Статус"/>
+            </listhead>
+            <template name="model">
+                <listitem>
+                    <listcell label="@bind(each.id)"></listcell>
+                    <listcell label="@bind(each.status)"></listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </div>
+</window>

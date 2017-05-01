@@ -1,0 +1,46 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.zkoss.org/2005/zul"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd"
+        id="selectRole"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm')  @init('ServiceCentre.ui.security.CreateUserVM')"
+        closable="true">
+
+        <groupbox form="@id('user') @load(vm.user) @save(vm.user, before={'create'})">
+            <caption>Создание пользователя</caption>
+            <grid>
+                <columns>
+                    <column/>
+                    <column/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="Имя"/>
+                        <textbox value="@bind(user.name)" id="name"/>
+                    </row>
+                    <row>
+                        <label value="Отчество"/>
+                        <textbox value="@bind(user.secondName)"/>
+                    </row>
+                    <row>
+                        <label value="Фамилия"/>
+                        <textbox value="@bind(user.familyName)"/>
+                    </row>
+                    <row>
+                        <label value="E-mail"/>
+                        <textbox value="@bind(user.email)" constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address"/>
+                    </row>
+                    <row>
+                        <label value="Пароль"/>
+                        <textbox value="@bind(user.password)" type="password"/>
+                    </row>
+                </rows>
+            </grid>
+        </groupbox>
+    <hbox width="600px">
+    <button id="action.create" label="Создать" onClick="@command('create')" />
+    <button id="action.select.roles" onClick="@command('showRoleList')"/>
+    </hbox>
+</window>

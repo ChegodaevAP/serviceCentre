@@ -1,0 +1,30 @@
+<window height="100%"
+        width="100%"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('ServiceCentre.ui.PlacesListVM')">
+    <div>
+        <div>
+            <hbox align="center">
+                Адрес:
+                <textbox value="@bind(vm.keyWord)"/>
+                <button iconSclass="z-icon-search" onClick="@command('search')"/>
+                <button iconSclass="z-icon-plus" onClick="@command('addPlace')"/>
+                <button iconSclass="z-icon-refresh" onClick="@command('refresh')" />
+            </hbox>
+            <listbox height="100%" model="@bind(vm.placeListModel)" emptyMessage="Адресов не найдено"
+                     selectedItem="@bind(vm.selectedPlace)" style="margin-top:10px"
+                     mold="paging" pageSize="10" onDoubleClick="@command('viewPlace')">
+                <listhead>
+                    <listheader width="10%" label="№"/>
+                    <listheader width="80%" label="Адрес"/>
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="@bind(each.id)"></listcell>
+                        <listcell label="@bind(each.address)"></listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </div>
+    </div>
+</window>

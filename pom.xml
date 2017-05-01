@@ -17,7 +17,6 @@
         <packname>-${maven.build.timestamp}</packname>
     </properties>
 
-    <description>A demo project for Simple ZK plus Spring Sec</description>
 
     <repositories>
 
@@ -64,6 +63,11 @@
         </dependency>
         <!-- ZK -->
         <dependency>
+            <groupId>org.zkoss.zkforge</groupId>
+            <artifactId>gmapsz</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+        <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkplus</artifactId>
             <version>${zk.version}</version>
@@ -88,7 +92,6 @@
             <artifactId>zkex</artifactId>
             <version>${zk.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkbind</artifactId>

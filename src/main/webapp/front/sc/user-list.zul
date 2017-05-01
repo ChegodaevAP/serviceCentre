@@ -1,0 +1,13 @@
+<zk>
+    <separator></separator>
+    <window vflex="true"  position="center" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm')  @init('ServiceCentre.ui.UserVM')">
+        <vlayout>
+
+            <a href="/login">login</a>
+            <a href="/logout">logout</a>
+
+            <label value="@load(vm.allUser.name)" />
+        </vlayout>
+    </window>
+</zk>

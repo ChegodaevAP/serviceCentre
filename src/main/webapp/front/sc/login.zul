@@ -1,0 +1,52 @@
+<?page id="testZul" title="InfoLIfe"?>
+<window id="loginwin">
+    <style>
+        .login-page {
+        border-radius: 5%;
+        }
+        .login-window {
+        margin-top: 15%;
+        margin-left: 35%;
+        margin-right: 35%;
+        border-radius : 5%
+        }
+        td {
+        }
+        td: hover{
+        }
+        button {
+        background-color: #0e90d2!important;
+        }
+    </style>
+    <div align="center" sclass="login-window z-popup">
+        <html style="color:red" if="${not empty param.login_error}">
+            <![CDATA[
+        Your login attempt was not successful, try again.<br/><br/>
+        Reason: ${SPRING_SECURITY_LAST_EXCEPTION.message}
+       ]]>
+        </html>
+
+        <groupbox sclass="login-page">
+            <!-- j_spring_security_check is default post URL processed by Spring Security AuthenticationFilter -->
+            <html:form action="j_spring_security_check" method="POST"
+                       xmlns:html="native">
+                <grid>
+                    <rows>
+                        <row>Логин :
+                            <textbox id="u" name="j_username"/>
+                        </row>
+                        <row>Пароль :
+                            <textbox id="p" type="password" name="j_password"/>
+                        </row>
+                        <row spans="2">
+                            <hbox>
+                                <button type="reset" label="Сброс"/>
+                                <button type="submit" label="Войти"/>
+                            </hbox>
+                        </row>
+                    </rows>
+                </grid>
+            </html:form>
+        </groupbox>
+    </div>
+</window>

@@ -1,0 +1,35 @@
+<window
+        onClose="@command('close')"
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('ServiceCentre.ui.ClientListVM')">
+    <hbox width="100%" align="center">
+        Адрес:
+        <textbox value="@bind(vm.keyWord)"/>
+        <button iconSclass="z-icon-search" onClick="@command('search')"/>
+        <button iconSclass="z-icon-plus" onClick="@command('addClient') @global-command('refresh')"/>
+        <button iconSclass="z-icon-refresh" onClick="@global-command('refresh')"/>
+    </hbox>
+    <listbox height="100%" width="100%" model="@bind(vm.clientListModel)" emptyMessage="Клиентов не найдено"
+             selectedItem="@bind(vm.selectedClient)"
+             mold="paging" pageSize="10">
+        <listhead>
+            <listheader width="15%" label="№"/>
+            <listheader width="15%" label="Имя"/>
+            <listheader width="15%" label="Фамилия"/>
+            <listheader width="15%" label="Отчество"/>
+            <listheader width="15%" label="Адрес"/>
+            <listheader width="15%" label="Телефон"/>
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="@bind(each.id)"></listcell>
+                <listcell label="@bind(each.name)"></listcell>
+                <listcell label="@bind(each.midleName)"></listcell>
+                <listcell label="@bind(each.surname)"></listcell>
+                <listcell label="@bind(each.address)"></listcell>
+                <listcell label="@bind(each.phone)"></listcell>
+            </listitem>
+        </template>
+    </listbox>
+    <button label="Сохранить" iconSclass="z-icon-save" onClick="@command('close')" visible=" not @load('isMenuMod')"/>
+</window>

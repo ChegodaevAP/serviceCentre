@@ -1,0 +1,21 @@
+<div id="sidebar" sclass="sidebar" apply="uiController.SidebarComposer">
+	<!-- Navigation List -->
+	<navbar id="navbar" sclass="nav-list" orient="vertical">
+		<navitem label="Заказы" iconSclass="z-icon-home" selected="true" onClick="@command('showRequests')"/>
+		<nav label="Справочники" iconSclass="z-icon-list">
+			<navitem label="Места" iconSclass="z-icon-angle-double-right" onClick="@command('showPlaces')"/>
+			<navitem label="Статусы" iconSclass="z-icon-angle-double-right" onClick="@command('showStatus')" />
+			<navitem label="Клиенты"  iconSclass="z-icon-angle-double-right" onClick="@command('showClients')" />
+			<navitem label="Неисправности"  iconSclass="z-icon-angle-double-right" onClick="@command('showDefects')" />
+		</nav>
+	</navbar>
+	<!-- Toggler -->
+	<div sclass="sidebar-collapse">
+		<a id="toggler" iconSclass="z-icon-angle-double-left"/>
+	</div>
+	<!-- Tooptip for Calender Navitem -->
+	<popup id="calpp" zclass="tooltip" sclass="right tooltip-error cal">
+		<span zclass="tooltip-arrow"/>
+		<label zclass="tooltip-inner" value="2 Important Event"/>
+	</popup>
+</div>

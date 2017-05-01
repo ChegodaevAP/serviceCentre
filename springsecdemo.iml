@@ -48,6 +48,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-web:3.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:3.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:3.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.zkoss.zkforge:gmapsz:3.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.zkoss.zk:zkplus:8.0.3.1-Eval" level="project" />
     <orderEntry type="library" name="Maven: org.zkoss.zk:zk:8.0.3.1-Eval" level="project" />
     <orderEntry type="library" name="Maven: org.zkoss.zk:zul:8.0.3.1-Eval" level="project" />
